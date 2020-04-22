@@ -1,10 +1,30 @@
 <!doctype html>
 <html>
 <head>
-    <title></title>
+    <title>My Imageboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+    <h1>My Imageboard with MSG</h1>
+
+    <div id="main">
+        <h3>Latest Images:</h3>
+        <div  id="image-container">
+            <div  v-for='image in images' @click='myFunction' class="grid-element">
+                <div  class="image-div">
+                    <figure>
+                        <img class="image" :src="image.url" :alt="image.description">
+                        <figcaption class="caption">{{ image.title }}</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>

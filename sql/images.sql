@@ -29,3 +29,6 @@ INSERT INTO images (url, username, title, description) VALUES (
     'To be or not to be',
     'That is the question.'
 );
+
+-- cd into folder containing this file, then run this line in terminal to reset the tables
+-- psql -d imageboard -f images.sql
