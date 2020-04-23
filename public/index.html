@@ -8,9 +8,22 @@
     <h1>My Imageboard with MSG</h1>
 
     <div id="main">
+
+        <form>
+            <!-- for text fields, use v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
+            <input v-model='title' type="text" name='title' placeholder='title'>
+            <input v-model='description' type="text" name='description' placeholder='description'>
+            <input v-model='username' type="text" name='username' placeholder='username'>
+            <input @change='handleChange' type="file" name='file' accept='image/*'> <!-- /* Tells us that it only accepts files that are images -->
+
+            <button @click='handleClick'>Submit</button><span>(Image should appear within 3-6 seconds)</span>
+        </form>
+
+
+        
         <h3>Latest Images:</h3>
         <div  id="image-container">
-            <div  v-for='image in images' @click='myFunction' class="grid-element">
+            <div  v-for='image in images' class="grid-element">
                 <div  class="image-div">
                     <figure>
                         <img class="image" :src="image.url" :alt="image.description">

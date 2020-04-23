@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: aliceblue;
+    background-color: bisque;
 }
 
 #main {
@@ -15,7 +15,7 @@ body {
     /* border: 1px red solid; */
     margin-top: 30px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     grid-row-gap: 20px;
 }
 
@@ -28,7 +28,7 @@ body {
 
 .image-div {
     border: 1px grey solid;
-    border-radius: 5px;
+    border-radius: 3px;
     padding: 0;
     width: auto;
 }
@@ -38,9 +38,10 @@ figure {
 }
 
 .image {
+    border-radius: 3px;
     height: 200px;
     width: 300px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .caption {

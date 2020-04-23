@@ -6,13 +6,16 @@
         data: {
             name: "msg",
             seen: true,
-            // cities: [],
             images: [],
+            title: "",
+            description: "",
+            username: "",
+            file: null,
         },
         mounted: function () {
             console.log("my vue has MOUNTED!");
 
-            console.log("this OUTSIDE axios: ", this);
+            // console.log("this OUTSIDE axios: ", this);
 
             //the "this" is the way in which we can access
             var self = this;
@@ -25,22 +28,40 @@
                 .catch(function (err) {
                     console.log("ERROR in axios.get /images: ", err);
                 });
-
-            // //the route in here has to match the app.get(/route) in index.js
-            // axios.get("/cities").then(function (response) {
-            //     // console.log("response from /cities: ", response.data);
-            //     /*The "this" object in here is no longer the same "this" object that is outside of here.
-            //         We need to store it in a variable, e.g. "self", and then we can use it in here.
-            //         */
-            //     console.log("this INSIDE axios: ", this);
-
-            //     //Assign the data from our GET request to the 'cities' property in our 'data' property (note: the 'data' in the line below is not the same 'data' property in this file)
-            //     self.cities = response.data;
-            // });
         },
         methods: {
-            myFunction: function () {
-                console.log("myFunction is runnning!");
+            handleClick: function (e) {
+                e.preventDefault(); //prevents submit button in html form from triggering a POST request
+                console.log("this: ", this);
+
+                var self = this;
+                var formData = new FormData();
+
+                //the append() method comes from FormData. it lets us add properties in append('key', value) pairs
+                formData.append("title", this.title);
+                formData.append("description", this.description);
+                formData.append("username", this.username);
+                formData.append("file", this.file);
+                //conosle.logging formData won't show us these properties (even though it does have them), but more on that later
+
+                axios
+                    .post("/upload", formData) //sends formData along with post request
+                    .then(function (resp) {
+                        console.log("resp from POST /upload: ", resp);
+                        self.images.unshift(resp.data.rows[0]);
+                    })
+                    .catch(function (err) {
+                        console.log("ERROR in POST /upload: ", err);
+                    });
+            },
+            handleChange: function (e) {
+                console.log("handleChange is running! ");
+
+                //e.target.files[0] selects the file that you just chose to upload
+                console.log("file: : ", e.target.files[0]);
+
+                //assign the uploaded file to this.file
+                this.file = e.target.files[0];
             },
         },
     });
