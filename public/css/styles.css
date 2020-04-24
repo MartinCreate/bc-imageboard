@@ -47,3 +47,42 @@ figure {
 .caption {
     /* border: green 1px solid; */
 }
+
+/* ------------------------------------ MODAL ------------------------------------*/
+/* ------------ PART 3 below ------------ */
+.image-data {
+    font-size: 12px;
+}
+
+.modal {
+    background-color: rgba(255, 105, 180, 0.502);
+    margin: 50px;
+    /* Doesn't have to cover the screen, but we're doing it here for demo-purposes */
+    /* position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0; */
+}
+
+#x {
+    border: 2px solid red;
+}
+
+.comment-div {
+    border: 1px grey solid;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 20px;
+}
+
+.comment-user-date-div {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.comment-username,
+.comment-date {
+    display: inline;
+}
+/* ------------ PART 3 above ------------ */

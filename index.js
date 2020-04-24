@@ -2,6 +2,7 @@
 /* To check the images on aws, go to
 https://s3.console.aws.amazon.com/s3/buckets/martinpaul-msg-imageboard/
 */
+
 const express = require("express");
 const app = express();
 const db = require("./db");
@@ -36,8 +37,11 @@ const uploader = multer({
 });
 //////////////////////// DON'T TOUCH above - IMAGE UPLOAD BIOLDERPLATE /////////////////////////////
 
+////------------------------------ MIDDLEWARE -----------------------------------------------//
 app.use(express.static("./public"));
-////------------------------------ Page is loaded: GET tabledata -----------------------------------------------//
+app.use(express.json()); //body parsing middleware. detects JSON body that axios sends, parses it, and makes the resulting object be req.body (used here in app.post("/submit-comment", ...))
+
+////------------------------------ When Page is loaded: GET tabledata -----------------------------------------------//
 
 app.get("/images", (req, res) => {
     db.getImages()
@@ -54,12 +58,52 @@ app.get("/images", (req, res) => {
         });
 });
 
-////------------------------------ Submit button is pushed: Upload to AWS -----------------------------------------------//
+////------------------------------ MODULE -----------------------------------------------------------------------------------//
+////----- GET IMAGE- and COMMENT INFO -------------------------//
+
+app.get("/image/:imageId", (req, res) => {
+    db.getImageInfo(req.params.imageId)
+
+        //Get image info
+        .then(({ rows }) => {
+            const imgInfo = rows[0];
+            return [imgInfo, req.params.imageId];
+        })
+
+        //Get image Comments
+        .then((infoAndId) => {
+            db.getImageComments(infoAndId[1]).then(({ rows }) => {
+                let arr = rows;
+                let revComms = arr.reverse();
+                // console.log("rows: ", rows);
+                const imageInfoAndComments = [infoAndId[0], revComms];
+                res.json(imageInfoAndComments);
+            });
+        })
+
+        .catch((err) => {
+            console.log("ERROR in GET /images getImages(): ", err);
+        });
+});
+
+////----- SUBMIT COMMENT -------------------------//
+
+app.post("/submit-comment", (req, res) => {
+    const bod = req.body;
+    console.log("req.body: ", req.body);
+
+    db.insertComment(bod.newComment, bod.commenter, bod.img_id).then(
+        ({ rows }) => {
+            console.log("rows from insertComment: ", rows);
+            res.json(rows);
+        }
+    );
+});
+
+////------------------------------ SUBMIT IMAGE is pushed: Upload to AWS -----------------------------------------------//
 //uploader.single('propertyKey from formData') runs the multer code from the boilerplate above
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     const bod = req.body;
-    console.log("file: ", req.file); //info about file we just uploaded, including filename and such
-    console.log("input: ", req.body); //input fields from the client
 
     if (req.file) {
         db.insertImageData(
@@ -69,7 +113,7 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             bod.title,
             bod.description
         ).then(({ rows }) => {
-            //Send INSERT data back to script.js
+            //Send INSERT data back to vue in script.js
             res.json({
                 rows,
             });

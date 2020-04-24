@@ -19,12 +19,19 @@
             <button @click='handleClick'>Submit</button><span>(Image should appear within 3-6 seconds)</span>
         </form>
 
+    <!-- ------------------- MODAL below ------------------------------------- -->
+         <image-modal-component
+            v-if="selectedImage"
+            post-title="WHAT THE FUCK IS UP, KYLE!"
+            :id="selectedImage"
+            @closing-time="closeModal"
+        ></image-modal-component>
+    <!-- ------------------- MODAL above ------------------------------------- -->
 
-        
         <h3>Latest Images:</h3>
         <div  id="image-container">
             <div  v-for='image in images' class="grid-element">
-                <div  class="image-div">
+                <div  class="image-div" @click="selectedImage = image.id">
                     <figure>
                         <img class="image" :src="image.url" :alt="image.description">
                         <figcaption class="caption">{{ image.title }}</figcaption>
@@ -34,6 +41,44 @@
         </div>
 
     </div>
+
+    <!-- ------------------- MODAL below------------------------------------- -->
+    <script type="text/x-template" id="template">
+        <div class="modal">
+            <p id="x" @click="closeMe">Clicking here should close modal</p>
+            <img :src="image.url" :alt="image.description">
+            <h2>Title: {{image.title}}</h2>
+            <p>Description: {{image.description}}</p>
+            <p>Uploaded by {{image.username}} on {{image.created_at}}</p>
+
+            <button @click="count++">Click Me!</button>
+            <p>Counter: {{count}}</p>
+
+
+            <div class="submit-comment-div" >
+                <!-- for text fields, use v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
+                <input v-model='newComment' type="text" name='newComment' placeholder='Be nice :)'>
+                <input v-model='commenter' type="text" name='commenter' placeholder='username'>
+
+                <button @click='submitComment'>Submit</button>
+            </div>
+
+            <h3>Comments:</h3>
+            <div id="comments-container">
+                <div v-for="com in comments" class="comment-div">
+
+                    <p class="comment">{{com.comment}}</p>
+
+                    <div class=comment-user-date-div>
+                        by <p class="comment-username">{{com.username}}</p>
+                        on
+                        <p class="comment-date">{{com.created_at}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <!-- ------------------- MODAL above ------------------------------------- -->
 
 
     <script src="/js/vue.js"></script>
