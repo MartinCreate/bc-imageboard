@@ -5,10 +5,10 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1>My Imageboard with MSG</h1>
-
+    
     <div id="main">
-
+        <h1>My Imageboard with MSG</h1>
+        
         <form>
             <!-- for text fields, use v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
             <input v-model='title' type="text" name='title' placeholder='title'>
@@ -19,15 +19,7 @@
             <button @click='handleClick'>Submit</button><span>(Image should appear within 3-6 seconds)</span>
         </form>
 
-    <!-- ------------------- MODAL below ------------------------------------- -->
-         <image-modal-component
-            v-if="selectedImage"
-            post-title="WHAT THE FUCK IS UP, KYLE!"
-            :id="selectedImage"
-            @closing-time="closeModal"
-        ></image-modal-component>
-    <!-- ------------------- MODAL above ------------------------------------- -->
-
+        
         <h3>Latest Images:</h3>
         <div  id="image-container">
             <div  v-for='image in images' class="grid-element">
@@ -39,41 +31,66 @@
                 </div>
             </div>
         </div>
-
+        
+        <!-- ------------------- MODAL component below ------------------------------------- -->
+             <image-modal-component
+                v-if="selectedImage"
+                post-title="What am I even?"
+                :id="selectedImage"
+                @closing-time="closeModal"
+            ></image-modal-component>
+        <!-- ------------------- MODAL component above ------------------------------------- -->
     </div>
 
     <!-- ------------------- MODAL below------------------------------------- -->
     <script type="text/x-template" id="template">
-        <div class="modal">
-            <p id="x" @click="closeMe">Clicking here should close modal</p>
-            <img :src="image.url" :alt="image.description">
-            <h2>Title: {{image.title}}</h2>
-            <p>Description: {{image.description}}</p>
-            <p>Uploaded by {{image.username}} on {{image.created_at}}</p>
+        <div class="modal-background">
+            <div id="modal">
+                <div id="modal-content">
 
-            <button @click="count++">Click Me!</button>
-            <p>Counter: {{count}}</p>
+                    <p id="x" @click="closeMe">X</p>
 
+                    <div id="modal-image-container">
+                        <div id="modal-image-div">
+                            <img id="modal-image"  :src="image.url" :alt="image.description">
+                        </div>
+                    
+                        <!-- <div id="divider"></div> -->
 
-            <div class="submit-comment-div" >
-                <!-- for text fields, use v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
-                <input v-model='newComment' type="text" name='newComment' placeholder='Be nice :)'>
-                <input v-model='commenter' type="text" name='commenter' placeholder='username'>
-
-                <button @click='submitComment'>Submit</button>
-            </div>
-
-            <h3>Comments:</h3>
-            <div id="comments-container">
-                <div v-for="com in comments" class="comment-div">
-
-                    <p class="comment">{{com.comment}}</p>
-
-                    <div class=comment-user-date-div>
-                        by <p class="comment-username">{{com.username}}</p>
-                        on
-                        <p class="comment-date">{{com.created_at}}</p>
+                        <div class="image-desc">
+                            <h2>Title: {{image.title}}</h2>
+                            <p class="img-desc-text">Description: {{image.description}}</p>
+                            <p class="submission-info">Uploaded by {{image.username}} on {{image.created_at}}</p>
+                        </div>
+                        <!-- <div id="divider2"></div> -->
                     </div>
+
+
+                    <!-- <button @click="count++">Click Me!</button>
+                    <p>Counter: {{count}}</p> -->
+
+
+                    <div class="submit-comment-div postit" id="submit-comment-div-id">
+                        <!-- for text fields, use v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
+                        <input v-model='newComment' type="text" name='newComment' placeholder='Comment Here' class="comment-input">
+                        <input v-model='commenter' type="text" name='commenter' placeholder='username' class="comment-input comm">
+                        
+                        <button @click='submitComment' class="comm">Submit</button>
+                    </div>
+                    
+                    
+                    <h3 id="comments-title">Comments:</h3>
+                    <div id="comments-container">
+                        <div v-for="com in comments" class="postit comment-div">
+                            <p class="comment">{{com.comment}}</p>
+                            <div class="comment-user-date-div submission-info">
+                                by <p class="comment-username">{{com.username}}</p>
+                                on
+                                <p class="comment-date">{{com.created_at}}</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

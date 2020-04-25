@@ -27,7 +27,7 @@ module.exports.insertImageData = (url, username, title, description) => {
     );
 };
 
-////---------------------------------------- for MODULE ----------------------------------------//
+////---------------------------------------- MODULE ----------------------------------------//
 ////--GET imageinfo
 module.exports.getImageInfo = (id) => {
     return db.query(`

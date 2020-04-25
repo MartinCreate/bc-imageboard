@@ -1,14 +1,15 @@
 * {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
     background-color: bisque;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #main {
-    margin-top: 30px;
+    /* border: 1px blue solid; */
+    height: 100%;
 }
 
 #image-container {
@@ -49,32 +50,249 @@ figure {
 }
 
 /* ------------------------------------ MODAL ------------------------------------*/
-/* ------------ PART 3 below ------------ */
 .image-data {
     font-size: 12px;
 }
 
-.modal {
-    background-color: rgba(255, 105, 180, 0.502);
-    margin: 50px;
-    /* Doesn't have to cover the screen, but we're doing it here for demo-purposes */
-    /* position: fixed;
+.modal-background {
+    /* border: 2px red solid; */
+    /* background-color: rgba(255, 105, 180, 0.502); */
+    background-color: rgba(43, 43, 43, 0.502);
+    box-sizing: border-box;
+    /* When you change padding, change #x top & right */
+    padding: 10px 40px;
+    position: fixed;
     top: 0;
-    right: 0;
     bottom: 0;
-    left: 0; */
+    right: 0;
+    left: 0;
+    /* height: 100%; */
 }
 
-#x {
-    border: 2px solid red;
+#modal {
+    /* border: 1px blue solid; */
+    /* border-radius: 5px; */
+    background-color: rgba(0, 0, 0, 0.582);
+    box-sizing: border-box;
+    height: 100%;
+    padding: 25px;
+    /* padding-bottom: 25px; */
 }
 
-.comment-div {
-    border: 1px grey solid;
-    border-radius: 5px;
+#modal-content {
+    border: 2px lightgrey solid;
+    /* border-radius: 5px; */
+    /* background-color: antiquewhite; */
+    background-image: url("cork2.jpg");
+    box-sizing: border-box;
+    padding: 10px;
+    height: 100%;
+    overflow-y: scroll;
+    /* overflow-x: hidden; */
+}
+
+/* ------------------ Modal Image ------------------ */
+
+#modal-image-container {
+    /* border: 2px blueviolet solid; */
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#modal-image-div {
+    /* border: 1px red solid; */
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: inline-block;
+    max-width: 90%;
     padding: 5px;
-    margin: 20px;
+    margin: 10px;
+    margin-bottom: 20px;
 }
+
+#modal-image {
+    width: 100%;
+    object-fit: contain;
+}
+
+#modal-image-container h2 {
+    /* border: 1px red solid; */
+    /* text-align: left; */
+    width: 100%;
+}
+/* #divider {
+    border-bottom: 1px solid lightgrey;
+    margin-bottom: 20px;
+    width: 80%;
+} */
+
+.image-desc {
+    /* border: 2px red solid; */
+    background-color: white;
+    padding: 10px;
+    /* align-self: flex-start; */
+    text-align: left;
+}
+
+.image-desc h2 {
+    border-bottom: 1px red solid;
+    font-size: 30px;
+}
+.img-desc-text {
+    font-size: 25px;
+}
+
+.image-desc p {
+    border-bottom: 1px rgb(90, 153, 249) solid;
+}
+
+#modal-image-container p {
+    /* border: 1px solid red; */
+    margin-top: 20px;
+}
+
+.submission-info {
+    font-size: 14px;
+    font-style: italic;
+}
+
+/* #divider2 {
+    margin-top: 10px;
+    border-bottom: 3px solid lightgrey;
+    width: 120%;
+} */
+
+/* ------------------ Modal Comments ------------------ */
+
+/* ------ Input Comment --------------- */
+#submit-comment-div-id {
+    display: inline-block;
+}
+#submit-comment-div-id * {
+    /* border: 1px red solid; */
+    display: block;
+    font-size: 20px;
+}
+
+.comm {
+    border: 2px red solid;
+    margin-top: 15px;
+}
+
+.comment-input {
+    /* border: 2px red solid; */
+    border: none;
+    border-bottom: 1px black solid;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    height: 25px;
+}
+.comment-input:focus {
+    outline: none;
+}
+
+/* ------ Comments --------------- */
+#comments-container {
+    /* border: 1px solid red; */
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.276);
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* .comment-div { 
+    border: 1px grey solid; 
+    border-radius: 5px;
+    width: auto;
+    padding: 5px;
+    margin: 20px; 
+} */
+
+.postit {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    padding: 20px;
+    margin: 20px;
+    max-width: 50%;
+
+    /* I got the following styling for this .postit class from the blog post at the url in the next line */
+    /*      https://mentormate.com/blog/css-postit-note/      */
+    border: 1px solid #e8e8e8;
+    border-top: 20px solid #fdfd86;
+    /* font-family: "Reenie Beanie"; */
+    /* font-size: 22px; */
+    border-bottom-right-radius: 60px 5px;
+    /* display: inline-block; */
+    background: #ffff88; /* Old browsers */
+    background: -moz-linear-gradient(
+        -45deg,
+        #ffff88 81%,
+        #ffff88 82%,
+        #ffff88 82%,
+        #ffffc6 100%
+    ); /* FF3.6+ */
+    background: -webkit-gradient(
+        linear,
+        left top,
+        right bottom,
+        color-stop(81%, #ffff88),
+        color-stop(82%, #ffff88),
+        color-stop(82%, #ffff88),
+        color-stop(100%, #ffffc6)
+    ); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(
+        -45deg,
+        #ffff88 81%,
+        #ffff88 82%,
+        #ffff88 82%,
+        #ffffc6 100%
+    ); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(
+        -45deg,
+        #ffff88 81%,
+        #ffff88 82%,
+        #ffff88 82%,
+        #ffffc6 100%
+    ); /* Opera 11.10+ */
+    background: -ms-linear-gradient(
+        -45deg,
+        #ffff88 81%,
+        #ffff88 82%,
+        #ffff88 82%,
+        #ffffc6 100%
+    ); /* IE10+ */
+    background: linear-gradient(
+        135deg,
+        #ffff88 81%,
+        #ffff88 82%,
+        #ffff88 82%,
+        #ffffc6 100%
+    ); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', endColorstr='#ffffc6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+/* .postit:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: -0px;
+    bottom: 20px;
+    width: 200px;
+    height: 25px;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.4);
+    -moz-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    -webkit-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    -o-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    -ms-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    transform: matrix(-1, -0.1, 0, 1, 0, 0);
+} */
 
 .comment-user-date-div {
     margin-top: 20px;
@@ -85,4 +303,22 @@ figure {
 .comment-date {
     display: inline;
 }
-/* ------------ PART 3 above ------------ */
+
+#x {
+    /* border: 1px solid lightgrey; */
+    border-radius: 10px;
+    color: white;
+    /* box-sizing: border-box; */
+    display: inline-block;
+    padding: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    position: fixed;
+    /* Relation to .modal-background {padding: top: same, right: +3px } */
+    top: 10px;
+    right: 43px;
+}
+
+#x:hover {
+    color: grey;
+}

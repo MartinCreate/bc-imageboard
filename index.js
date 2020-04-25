@@ -7,6 +7,7 @@ const express = require("express");
 const app = express();
 const db = require("./db");
 const s3 = require("./s3");
+// const csurf = require("csurf"); //do we need csurf
 
 //////////////////////// DON'T TOUCH below - IMAGE UPLOAD BIOLDERPLATE /////////////////////////////
 //npm packages we installed
@@ -30,16 +31,15 @@ const diskStorage = multer.diskStorage({
 
 const uploader = multer({
     storage: diskStorage,
-    //limits uploaded filesize to be 2mb max
     limits: {
-        fileSize: 2097152,
+        fileSize: 2097152, //limits uploaded filesize to be 2mb max
     },
 });
 //////////////////////// DON'T TOUCH above - IMAGE UPLOAD BIOLDERPLATE /////////////////////////////
 
 ////------------------------------ MIDDLEWARE -----------------------------------------------//
-app.use(express.static("./public"));
 app.use(express.json()); //body parsing middleware. detects JSON body that axios sends, parses it, and makes the resulting object be req.body (used here in app.post("/submit-comment", ...))
+app.use(express.static("./public"));
 
 ////------------------------------ When Page is loaded: GET tabledata -----------------------------------------------//
 
@@ -72,13 +72,17 @@ app.get("/image/:imageId", (req, res) => {
 
         //Get image Comments
         .then((infoAndId) => {
-            db.getImageComments(infoAndId[1]).then(({ rows }) => {
-                let arr = rows;
-                let revComms = arr.reverse();
-                // console.log("rows: ", rows);
-                const imageInfoAndComments = [infoAndId[0], revComms];
-                res.json(imageInfoAndComments);
-            });
+            db.getImageComments(infoAndId[1])
+                .then(({ rows }) => {
+                    let arr = rows;
+                    let revComms = arr.reverse();
+                    // console.log("rows: ", rows);
+                    const imageInfoAndComments = [infoAndId[0], revComms];
+                    res.json(imageInfoAndComments);
+                })
+                .catch((err) => {
+                    console.log("ERROR in getImageComments: ", err);
+                });
         })
 
         .catch((err) => {
@@ -90,7 +94,7 @@ app.get("/image/:imageId", (req, res) => {
 
 app.post("/submit-comment", (req, res) => {
     const bod = req.body;
-    console.log("req.body: ", req.body);
+    // console.log("req.body: ", req.body);
 
     db.insertComment(bod.newComment, bod.commenter, bod.img_id).then(
         ({ rows }) => {

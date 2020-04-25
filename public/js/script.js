@@ -1,12 +1,12 @@
-// console.log("script is linked");
-
 (function () {
-    // --------------------------------------- PART 3 below ---------------------------------------//
     Vue.component("image-modal-component", {
         template: "#template",
         props: ["postTitle", "id"],
+
         mounted: function () {
             var self = this;
+
+            console.log("Hey, just checking...");
 
             axios
                 .get(`/image/${this.id}`)
@@ -15,7 +15,7 @@
                     self.image = resp.data[0];
                     self.comments = resp.data[1];
 
-                    console.log("Comments resp.data[1]: ", resp.data[1]);
+                    // console.log("Comments resp.data[1]: ", resp.data[1]);
                 })
                 .catch(function (err) {
                     console.log("ERROR in axios.get /image/:id : ", err);
@@ -39,9 +39,8 @@
                 console.log("I am emitting from the component... (child)");
                 this.$emit("closing-time");
             },
-            submitComment: function (e) {
+            submitComment: function () {
                 console.log("Submitting a comment");
-                e.preventDefault(); //prevents submit button in html form from triggering a POST request
 
                 var self = this;
                 console.log("this in submitComment: ", this);
@@ -70,45 +69,10 @@
         },
     });
 
-    // --------------------------------------- PART 3 above ---------------------------------------//
-
-    ////////////////////////////////////////// NEW below ////////////////////////////////////////////
-    // Vue.component("first-component", {
-    //     template: "#template",
-    //     props: ["postTitle", "id"],
-    //     mounted: function () {
-    //         console.log("postTitle: ", this.postTitle);
-    //         console.log("id in mounted of my component: ", this.id);
-    //         /* we can now make a request to the server sending the id,
-    //         and ask for all the information about that id.
-    //         */
-    //     },
-    //     //'data' in a vue.component is a function. why? because we can have multiple components(??)
-    //     data: function () {
-    //         return {
-    //             poopi: "Mortin",
-    //             count: 0,
-    //         };
-    //     },
-    //     methods: {
-    //         // //Demo-code below - this code does the same thing as our html p tag that has [@click="selectedFruit = fruit.id"]
-    //         // updateSelectedFruit: function (id) {
-    //         //     console.log("fruit.id: : ", id);
-    //         //     this.selectedFruit = id;
-    //         // },
-    //         // //Demo-code above
-    //         closeMe: function () {
-    //             console.log("I am emitting from the component... (child)");
-    //             this.$emit("muffin");
-    //         },
-    //     },
-    // });
-    ////////////////////////////////////////// NEW above ////////////////////////////////////////////
-
     new Vue({
         el: "#main",
         data: {
-            selectedImage: null,
+            selectedImage: 8,
             name: "msg",
             seen: true,
             images: [],
@@ -161,10 +125,7 @@
             handleChange: function (e) {
                 console.log("handleChange is running! ");
 
-                //e.target.files[0] selects the file that you just chose to upload
-                console.log("file: : ", e.target.files[0]);
-
-                //assign the uploaded file to the this.file property
+                //assign the file you want to upload file to the this.file property
                 this.file = e.target.files[0];
             },
             closeModal: function () {
