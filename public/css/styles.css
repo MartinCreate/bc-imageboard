@@ -4,8 +4,12 @@
 
 body {
     background-color: bisque;
-    font-family: Arial, Helvetica, sans-serif;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
 }
+
+/* ------------------------------------ MAIN PAGE ------------------------------------*/
 
 #main {
     /* border: 1px blue solid; */
@@ -70,9 +74,13 @@ figure {
 }
 
 #modal {
-    /* border: 1px blue solid; */
-    /* border-radius: 5px; */
+    border: 2px rgba(0, 0, 0, 0.342) solid;
+    border-top: 1px rgba(0, 0, 0, 0.342) solid;
+    border-left: 1px rgba(0, 0, 0, 0.342) solid;
     background-color: rgba(0, 0, 0, 0.582);
+    background-image: url("retina_wood2.png");
+    border-radius: 2px;
+    box-shadow: inset -1px -1px 1px 1px rgba(0, 0, 0, 0.39);
     box-sizing: border-box;
     height: 100%;
     padding: 25px;
@@ -80,10 +88,11 @@ figure {
 }
 
 #modal-content {
-    border: 2px lightgrey solid;
-    /* border-radius: 5px; */
+    /* border: 1px rgba(0, 0, 0, 0.459) solid; */
+    border-radius: 2px;
+    box-shadow: inset 1px 1px 1px 1px rgba(0, 0, 0, 0.39);
     /* background-color: antiquewhite; */
-    background-image: url("cork2.jpg");
+    background-image: url("cork-board.png");
     box-sizing: border-box;
     padding: 10px;
     height: 100%;
@@ -91,7 +100,7 @@ figure {
     /* overflow-x: hidden; */
 }
 
-/* ------------------ Modal Image ------------------ */
+/* ------------------ Modal Image & Description------------------ */
 
 #modal-image-container {
     /* border: 2px blueviolet solid; */
@@ -107,21 +116,28 @@ figure {
     /* border: 1px red solid; */
     border-radius: 10px;
     box-sizing: border-box;
-    display: inline-block;
-    max-width: 90%;
+    display: flex;
+    /* max-width: 70%; */
+    min-height: 50vh;
+    max-height: 90vh;
+    max-width: 80vw;
+    overflow: auto;
+
+    align-items: center;
+
     padding: 5px;
     margin: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 #modal-image {
-    width: 100%;
-    object-fit: contain;
+    max-width: 78vw;
+    max-height: 83vh;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.32);
 }
 
 #modal-image-container h2 {
     /* border: 1px red solid; */
-    /* text-align: left; */
     width: 100%;
 }
 /* #divider {
@@ -130,24 +146,70 @@ figure {
     width: 80%;
 } */
 
-.image-desc {
+#image-desc {
     /* border: 2px red solid; */
-    background-color: white;
-    padding: 10px;
-    /* align-self: flex-start; */
+    background-color: #fff;
+    /* background-image: url("paper_fibers.png"); */
+    box-shadow: 3px 5px 3px rgba(0, 0, 0, 0.32);
+
+    margin: 30px;
+    max-width: 40vw;
     text-align: left;
 }
 
-.image-desc h2 {
-    border-bottom: 1px red solid;
+#image-desc h2 {
+    border-bottom: 2px rgba(255, 0, 0, 0.685) solid;
     font-size: 30px;
 }
+#desc-title {
+    padding-left: 20px;
+    padding-top: 10px;
+    color: rgb(58, 58, 58);
+}
+
 .img-desc-text {
     font-size: 25px;
 }
 
-.image-desc p {
-    border-bottom: 1px rgb(90, 153, 249) solid;
+#image-desc p {
+    /* border-bottom: 1px rgb(90, 153, 249) solid; */
+    overflow: scroll;
+
+    /* Idea for the approach to underlining the text of this element within this selector comes from:
+      https://css3.wikidot.com/blog:lined-paper-with-css */
+
+    /* for padding:
+        -first value determines how close the text is to the lines
+        -fourth value determines left-right padding */
+    padding: 10px 5px 4px 30px;
+    position: relative;
+    color: #444;
+
+    background: #fff;
+    background: -webkit-gradient(
+            linear,
+            0 0,
+            0 100%,
+            from(#d9eaf3),
+            color-stop(4%, #fff)
+        )
+        0 4px;
+    background: -webkit-linear-gradient(top, rgb(90, 153, 249) 0%, #fff 8%) 0
+        4px;
+    background: -moz-linear-gradient(top, rgb(90, 153, 249) 0%, #fff 8%) 0 4px;
+    background: -ms-linear-gradient(top, rgb(90, 153, 249) 0%, #fff 8%) 0 4px;
+    background: -o-linear-gradient(top, rgb(90, 153, 249) 0%, #fff 8%) 0 4px;
+    background: linear-gradient(top, rgb(90, 153, 249) 0%, #fff 8%) 0 4px;
+
+    /* line-height value must match background size px */
+    line-height: 35px;
+
+    /* background-size px value must match line-height value */
+    -webkit-background-size: 100% 35px;
+    -moz-background-size: 100% 35px;
+    -ms-background-size: 100% 35px;
+    -o-background-size: 100% 35px;
+    background-size: 100% 35px;
 }
 
 #modal-image-container p {
@@ -170,17 +232,32 @@ figure {
 
 /* ------ Input Comment --------------- */
 #submit-comment-div-id {
-    display: inline-block;
+    display: block;
+    margin: 50px auto;
+    width: 30%;
 }
 #submit-comment-div-id * {
     /* border: 1px red solid; */
     display: block;
     font-size: 20px;
 }
+#submit-comment-div-id button {
+    border: 2px grey solid;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: 900;
+}
+#submit-comment-div-id button:hover {
+    background-color: grey;
+    color: white;
+}
+#submit-comment-div-id button:focus {
+    outline: none;
+    background-color: rgb(82, 82, 82);
+}
 
 .comm {
-    border: 2px red solid;
-    margin-top: 15px;
+    margin-top: 25px;
 }
 
 .comment-input {
@@ -193,14 +270,23 @@ figure {
 }
 .comment-input:focus {
     outline: none;
+    border-bottom: 2px black solid;
 }
 
 /* ------ Comments --------------- */
+#comments-title {
+    font-size: 30px;
+    color: rgb(58, 58, 58);
+    /* -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 0.687); */
+}
+
 #comments-container {
     /* border: 1px solid red; */
     border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.276);
-    margin-top: 50px;
+    background-color: rgba(255, 255, 255, 0.377);
+    /* margin-top: 50px; */
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -221,13 +307,15 @@ figure {
     margin: 20px;
     max-width: 50%;
 
-    /* I got the following styling for this .postit class from the blog post at the url in the next line */
-    /*      https://mentormate.com/blog/css-postit-note/      */
+    /* The following styling for this .postit class (with minor adjustments made by me) comes from the blog post at the url:
+            https://mentormate.com/blog/css-postit-note/      */
+
     border: 1px solid #e8e8e8;
     border-top: 20px solid #fdfd86;
     /* font-family: "Reenie Beanie"; */
     /* font-size: 22px; */
     border-bottom-right-radius: 60px 5px;
+
     /* display: inline-block; */
     background: #ffff88; /* Old browsers */
     background: -moz-linear-gradient(
@@ -274,25 +362,11 @@ figure {
         #ffff88 82%,
         #ffffc6 100%
     ); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', endColorstr='#ffffc6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-}
+    /* IE6-9 fallback on horizontal gradient */
+    /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', endColorstr='#ffffc6',GradientType=1 ); */
 
-/* .postit:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    right: -0px;
-    bottom: 20px;
-    width: 200px;
-    height: 25px;
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.4);
-    -moz-transform: matrix(-1, -0.1, 0, 1, 0, 0);
-    -webkit-transform: matrix(-1, -0.1, 0, 1, 0, 0);
-    -o-transform: matrix(-1, -0.1, 0, 1, 0, 0);
-    -ms-transform: matrix(-1, -0.1, 0, 1, 0, 0);
-    transform: matrix(-1, -0.1, 0, 1, 0, 0);
-} */
+    box-shadow: 2px 8px 5px rgba(0, 0, 0, 0.4);
+}
 
 .comment-user-date-div {
     margin-top: 20px;
@@ -314,9 +388,9 @@ figure {
     font-weight: bold;
     cursor: pointer;
     position: fixed;
-    /* Relation to .modal-background {padding: top: same, right: +3px } */
+    /* Relation to .modal-background {padding: top: same, right: +5px } */
     top: 10px;
-    right: 43px;
+    right: 45px;
 }
 
 #x:hover {

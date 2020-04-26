@@ -65,6 +65,8 @@
                     .catch(function (err) {
                         console.log("ERROR in POST /submit-comment: ", err);
                     });
+                this.comment = "";
+                this.username = "";
             },
         },
     });

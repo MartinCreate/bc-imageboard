@@ -51,17 +51,20 @@
                     <p id="x" @click="closeMe">X</p>
 
                     <div id="modal-image-container">
+                        
                         <div id="modal-image-div">
                             <img id="modal-image"  :src="image.url" :alt="image.description">
+                        </div>
+                        
+                        <div id="image-desc">
+                            <h2><div id="desc-title">Title: {{image.title}}<div></h2>
+                            <p class="img-desc-text">Description (just adding some more text to see what it would look like hahahahahaahahahhahaaaaaa): {{image.description}}
+                                <br/><span class="submission-info">Uploaded by {{image.username}} on {{image.created_at}}</span> </p>
+                            <!-- <p class="submission-info">Uploaded by {{image.username}} on {{image.created_at}}</p> -->
                         </div>
                     
                         <!-- <div id="divider"></div> -->
 
-                        <div class="image-desc">
-                            <h2>Title: {{image.title}}</h2>
-                            <p class="img-desc-text">Description: {{image.description}}</p>
-                            <p class="submission-info">Uploaded by {{image.username}} on {{image.created_at}}</p>
-                        </div>
                         <!-- <div id="divider2"></div> -->
                     </div>
 
@@ -71,16 +74,17 @@
 
 
                     <div class="submit-comment-div postit" id="submit-comment-div-id">
-                        <!-- for text fields, use v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
-                        <input v-model='newComment' type="text" name='newComment' placeholder='Comment Here' class="comment-input">
-                        <input v-model='commenter' type="text" name='commenter' placeholder='username' class="comment-input comm">
+                        <!-- for text fields, v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
+                        <p>Add Your Comment:</p>
+                        <input v-model='newComment' type="text" name='newComment' placeholder='Comment Here' class="comment-input comm">
+                        <input v-model='commenter' type="text" name='commenter' placeholder='Username' class="comment-input comm">
                         
                         <button @click='submitComment' class="comm">Submit</button>
                     </div>
                     
                     
-                    <h3 id="comments-title">Comments:</h3>
                     <div id="comments-container">
+                        <h3 id="comments-title">Comments:</h3>
                         <div v-for="com in comments" class="postit comment-div">
                             <p class="comment">{{com.comment}}</p>
                             <div class="comment-user-date-div submission-info">
