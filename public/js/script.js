@@ -65,8 +65,9 @@
                     .catch(function (err) {
                         console.log("ERROR in POST /submit-comment: ", err);
                     });
-                this.comment = "";
-                this.username = "";
+
+                // this.comment = "";
+                // this.username = "";
             },
         },
     });
@@ -74,7 +75,7 @@
     new Vue({
         el: "#main",
         data: {
-            selectedImage: 8,
+            selectedImage: null,
             name: "msg",
             seen: true,
             images: [],

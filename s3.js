@@ -16,7 +16,7 @@ const s3 = new aws.S3({
 
 exports.upload = (req, res, next) => {
     if (!req.file) {
-        console.log("ERROR req.file isnt there :(");
+        console.log("ERROR in s3.js upload: req.file isnt there :(");
         return res.sendStatus(500);
     }
 

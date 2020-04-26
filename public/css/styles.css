@@ -16,11 +16,159 @@ body {
     height: 100%;
 }
 
+#main h1 {
+    margin: 20px;
+    text-align: center;
+}
+
+/* ----------------- Upload-Image Form ----------------- */
+/* qanchor */
+#main form {
+    /* border-bottom: 1px grey solid; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-bottom: 10px;
+    /* grid-row-gap: 20px; */
+}
+
+#upload-header {
+    /* border: 1px green solid; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#input-fields-div {
+    /* border: 1px purple solid; */
+    min-width: 300px;
+}
+
+#input-fields-div label {
+    /* border: 1px blue solid; */
+    box-sizing: border-box;
+    font-size: 20px;
+    float: left;
+    clear: left;
+    width: 40%;
+    min-width: 140px;
+    padding-right: 10px;
+    text-align: right;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#input-fields-div input {
+    border: none;
+    /* border: 1px purple solid; */
+    border-bottom: 1px grey solid;
+    background-color: rgba(245, 245, 245, 0);
+    box-sizing: border-box;
+    font-size: 20px;
+    width: 45%;
+    margin-top: 12px;
+    margin-bottom: 10px;
+    margin-right: 5%;
+
+    float: left;
+}
+
+#input-fields-div input:focus {
+    outline: none;
+    border-bottom: 2px solid grey;
+    /* background-color: rgb(247, 247, 247); */
+}
+
+#upload-buttons-div {
+    /* border: 1px blue solid; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#upload-buttons-div label {
+    border: none;
+    border-bottom: 3px rgb(52, 52, 52) solid;
+    color: rgb(52, 52, 52);
+    background-color: rgba(255, 255, 255, 0);
+    /* border: 2px rgb(52, 52, 52) solid;
+    color: rgb(52, 52, 52);
+    background-color: white; */
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#upload-buttons-div label:hover {
+    color: white;
+    background-color: rgb(52, 52, 52);
+}
+
+#choose-image {
+    /* Hide 'choose file' button */
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+#submit-button {
+    border: 3px rgb(52, 52, 52) solid;
+    color: rgb(52, 52, 52);
+    background-color: white;
+    /* border: none;
+    border-bottom: 3px rgb(52, 52, 52) solid;
+    color: rgb(52, 52, 52);
+    background-color: rgba(255, 255, 255, 0); */
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 3px 10px;
+    margin: 15px 0;
+}
+#submit-button:hover {
+    color: white;
+    background-color: rgb(52, 52, 52);
+}
+
+/* form span {
+    font-style: italic;
+    color: grey;
+} */
+
+form button {
+    display: block;
+}
+
+/* ---------------------------------- Image Container ---------------------------------- */
+
+#main h3 {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 25px;
+}
+
+/* qanchor */
 #image-container {
     /* border: 1px red solid; */
-    margin-top: 30px;
+    border-width: 1px;
+    border-style: solid;
+    border-image-source: url("retina_wood2.png");
+    border-image-slice: 20;
+    border-image-width: 10;
+    border-image-outset: 1;
+    border-image-repeat: repeat;
+    box-shadow: inset 5px 5px 1px 3px black, 0px -1px 5px 1px grey;
+
+    margin-top: 10px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    background-image: url("cork-board.png");
+
+    padding: 30px 10px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     grid-row-gap: 20px;
 }
 
@@ -32,10 +180,13 @@ body {
 }
 
 .image-div {
-    border: 1px grey solid;
-    border-radius: 3px;
+    /* border: 1px grey solid; */
+    background-image: url("paper_fibers.png");
+    position: relative;
     padding: 0;
     width: auto;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 }
 
 figure {
@@ -43,10 +194,21 @@ figure {
 }
 
 .image {
-    border-radius: 3px;
-    height: 200px;
-    width: 300px;
+    height: 180px;
+    width: 250px;
     object-fit: contain;
+    margin-bottom: 15px;
+}
+
+figcaption {
+    background-color: white;
+    margin: 0;
+    padding: 2px;
+    padding-left: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .caption {
@@ -60,9 +222,9 @@ figure {
 
 .modal-background {
     /* border: 2px red solid; */
-    /* background-color: rgba(255, 105, 180, 0.502); */
     background-color: rgba(43, 43, 43, 0.502);
     box-sizing: border-box;
+
     /* When you change padding, change #x top & right */
     padding: 10px 40px;
     position: fixed;
@@ -80,24 +242,31 @@ figure {
     background-color: rgba(0, 0, 0, 0.582);
     background-image: url("retina_wood2.png");
     border-radius: 2px;
-    box-shadow: inset -1px -1px 1px 1px rgba(0, 0, 0, 0.39);
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.39),
+        inset -1px -1px 0px 1px rgba(0, 0, 0, 0.39);
     box-sizing: border-box;
     height: 100%;
-    padding: 25px;
-    /* padding-bottom: 25px; */
+    padding: 20px;
 }
 
 #modal-content {
     /* border: 1px rgba(0, 0, 0, 0.459) solid; */
     border-radius: 2px;
     box-shadow: inset 1px 1px 1px 1px rgba(0, 0, 0, 0.39);
-    /* background-color: antiquewhite; */
     background-image: url("cork-board.png");
-    box-sizing: border-box;
-    padding: 10px;
     height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+#modal-content-shadowsaver {
+    /* border: 1px red solid; */
+    box-sizing: border-box;
+    height: 99.8%;
+    width: 100%;
+    padding: 10px;
+    padding-top: 2px;
     overflow-y: scroll;
-    /* overflow-x: hidden; */
 }
 
 /* ------------------ Modal Image & Description------------------ */
@@ -113,38 +282,39 @@ figure {
 }
 
 #modal-image-div {
-    /* border: 1px red solid; */
-    border-radius: 10px;
+    /* border: 1px green solid; */
     box-sizing: border-box;
     display: flex;
-    /* max-width: 70%; */
-    min-height: 50vh;
-    max-height: 90vh;
-    max-width: 80vw;
+    min-height: 20vh;
+    max-height: 92vh;
+    max-width: 82vw;
     overflow: auto;
 
     align-items: center;
 
     padding: 5px;
-    margin: 10px;
-    margin-bottom: 40px;
+    padding-top: 0;
+    margin: 0;
+}
+
+#modal-image-div div {
+    /* border: 1px red solid; */
+    padding: 20px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.32);
 }
 
 #modal-image {
     max-width: 78vw;
     max-height: 83vh;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.32);
+    /* box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.32); */
 }
 
 #modal-image-container h2 {
     /* border: 1px red solid; */
     width: 100%;
 }
-/* #divider {
-    border-bottom: 1px solid lightgrey;
-    margin-bottom: 20px;
-    width: 80%;
-} */
 
 #image-desc {
     /* border: 2px red solid; */
@@ -152,7 +322,7 @@ figure {
     /* background-image: url("paper_fibers.png"); */
     box-shadow: 3px 5px 3px rgba(0, 0, 0, 0.32);
 
-    margin: 30px;
+    margin: 0px;
     max-width: 40vw;
     text-align: left;
 }
@@ -162,8 +332,8 @@ figure {
     font-size: 30px;
 }
 #desc-title {
-    padding-left: 20px;
-    padding-top: 10px;
+    padding: 10px 30px;
+    padding-bottom: 0;
     color: rgb(58, 58, 58);
 }
 
@@ -175,17 +345,19 @@ figure {
     /* border-bottom: 1px rgb(90, 153, 249) solid; */
     overflow: scroll;
 
-    /* Idea for the approach to underlining the text of this element within this selector comes from:
-      https://css3.wikidot.com/blog:lined-paper-with-css */
+    /* Most of the code below (within this selector) comes from:
+      https://css3.wikidot.com/blog:lined-paper-with-css 
+
+      (some of the values have been changed)*/
 
     /* for padding:
-        -first value determines how close the text is to the lines
-        -fourth value determines left-right padding */
-    padding: 10px 5px 4px 30px;
+        -first value: changes how close the text is to the lines
+        */
+    padding: 10px 30px 4px 30px;
     position: relative;
     color: #444;
 
-    background: #fff;
+    background: rgb(244, 240, 240);
     background: -webkit-gradient(
             linear,
             0 0,
@@ -273,23 +445,21 @@ figure {
     border-bottom: 2px black solid;
 }
 
-/* ------ Comments --------------- */
-#comments-title {
-    font-size: 30px;
-    color: rgb(58, 58, 58);
-    /* -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: rgba(0, 0, 0, 0.687); */
-}
+/* ------ Comments Container------------------- */
 
 #comments-container {
     /* border: 1px solid red; */
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.377);
-    /* margin-top: 50px; */
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+#comments-title {
+    font-size: 30px;
+    color: rgb(40, 40, 40);
 }
 
 /* .comment-div { 
@@ -304,7 +474,7 @@ figure {
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
     padding: 20px;
-    margin: 20px;
+    /* margin: 20px; */
     max-width: 50%;
 
     /* The following styling for this .postit class (with minor adjustments made by me) comes from the blog post at the url:
@@ -368,6 +538,14 @@ figure {
     box-shadow: 2px 8px 5px rgba(0, 0, 0, 0.4);
 }
 
+.comment-div {
+    /* border: 1px grey solid;
+    border-radius: 5px;
+    width: auto;
+    padding: 5px; */
+    margin-top: 15px;
+}
+
 .comment-user-date-div {
     margin-top: 20px;
     font-size: 14px;
@@ -381,18 +559,34 @@ figure {
 #x {
     /* border: 1px solid lightgrey; */
     border-radius: 10px;
-    color: white;
+    color: rgb(103, 103, 103);
     /* box-sizing: border-box; */
     display: inline-block;
     padding: 5px;
+    font-size: 25px;
     font-weight: bold;
     cursor: pointer;
     position: fixed;
-    /* Relation to .modal-background {padding: top: same, right: +5px } */
-    top: 10px;
-    right: 45px;
+
+    /* Relation to .modal-background {padding: top: +25, right: +30px } */
+    top: 35px;
+    right: 70px;
 }
 
 #x:hover {
-    color: grey;
+    color: black;
+}
+
+@media screen and (min-width: 300px) and (max-width: 600px) {
+    #upload-header {
+        margin: 0;
+    }
+
+    #upload-header img {
+        visibility: hidden;
+        position: relative;
+        display: fixed;
+        top: 0;
+        z-index: -10;
+    }
 }

@@ -7,16 +7,26 @@
 <body>
     
     <div id="main">
-        <h1>My Imageboard with MSG</h1>
+        <h1>Image | Board</h1>
         
         <form>
-            <!-- for text fields, use v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
-            <input v-model='title' type="text" name='title' placeholder='title'>
-            <input v-model='description' type="text" name='description' placeholder='description'>
-            <input v-model='username' type="text" name='username' placeholder='username'>
-            <input @change='handleChange' type="file" name='file' accept='image/*'> <!-- /* Tells us that it only accepts files that are images -->
+            <div id="upload-header">
+                <h3>Upload Your Image:</h3> <img src="css/arrow.png">
+            </div>
 
-            <button @click='handleClick'>Submit</button><span>(Image should appear within 3-6 seconds)</span>
+            <div id="input-fields-div">
+                <p></p>
+                <!-- for text fields, use v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
+                <label for='title'>Image Title: </label><input v-model='title' type="text" name='title' id='title' placeholder='title'>
+                <label for='description'>Image Description: </label><input v-model='description' type="text" name='description' id='description' placeholder='description'>
+                <label for='username'>Username: </label><input v-model='username' type="text" name='username'  id='username' placeholder='username'>
+            </div>
+            <div id="upload-buttons-div">
+                <label for="choose-image">Choose an image ...</label>
+                <input @change='handleChange' type="file" name='file' id='choose-image' accept='image/*'> <!-- /* Tells us that it only accepts files that are images -->
+
+                <button @click='handleClick' id='submit-button'>Submit</button>
+            </div>
         </form>
 
         
@@ -47,54 +57,55 @@
         <div class="modal-background">
             <div id="modal">
                 <div id="modal-content">
+                    <div id=modal-content-shadowsaver>
 
-                    <p id="x" @click="closeMe">X</p>
+                        <p id="x" @click="closeMe">X</p>
 
-                    <div id="modal-image-container">
+                        <div id="modal-image-container">
+                            
+                            <div id="modal-image-div">
+                                <div><img id="modal-image"  :src="image.url" :alt="image.description"></div>
+                            </div>
+                            
+                            <div id="image-desc">
+                                <h2><div id="desc-title">{{image.title}}<div></h2>
+                                <p class="img-desc-text">{{image.description}}
+                                    <br/><span class="submission-info">Uploaded by {{image.username}} on {{image.created_at}}</span> </p>
+                                <!-- <p class="submission-info">Uploaded by {{image.username}} on {{image.created_at}}</p> -->
+                            </div>
                         
-                        <div id="modal-image-div">
-                            <img id="modal-image"  :src="image.url" :alt="image.description">
+                            <!-- <div id="divider"></div> -->
+
+                            <!-- <div id="divider2"></div> -->
+                        </div>
+
+
+                        <!-- <button @click="count++">Click Me!</button>
+                        <p>Counter: {{count}}</p> -->
+
+
+                        <div class="submit-comment-div postit" id="submit-comment-div-id">
+                            <!-- for text fields, v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
+                            <p>Add Your Comment:</p>
+                            <input v-model='newComment' type="text" name='newComment' placeholder='Comment Here' class="comment-input comm">
+                            <input v-model='commenter' type="text" name='commenter' placeholder='Username' class="comment-input comm">
+                            
+                            <button @click='submitComment' class="comm">Submit</button>
                         </div>
                         
-                        <div id="image-desc">
-                            <h2><div id="desc-title">Title: {{image.title}}<div></h2>
-                            <p class="img-desc-text">Description (just adding some more text to see what it would look like hahahahahaahahahhahaaaaaa): {{image.description}}
-                                <br/><span class="submission-info">Uploaded by {{image.username}} on {{image.created_at}}</span> </p>
-                            <!-- <p class="submission-info">Uploaded by {{image.username}} on {{image.created_at}}</p> -->
-                        </div>
-                    
-                        <!-- <div id="divider"></div> -->
-
-                        <!-- <div id="divider2"></div> -->
-                    </div>
-
-
-                    <!-- <button @click="count++">Click Me!</button>
-                    <p>Counter: {{count}}</p> -->
-
-
-                    <div class="submit-comment-div postit" id="submit-comment-div-id">
-                        <!-- for text fields, v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
-                        <p>Add Your Comment:</p>
-                        <input v-model='newComment' type="text" name='newComment' placeholder='Comment Here' class="comment-input comm">
-                        <input v-model='commenter' type="text" name='commenter' placeholder='Username' class="comment-input comm">
                         
-                        <button @click='submitComment' class="comm">Submit</button>
-                    </div>
-                    
-                    
-                    <div id="comments-container">
-                        <h3 id="comments-title">Comments:</h3>
-                        <div v-for="com in comments" class="postit comment-div">
-                            <p class="comment">{{com.comment}}</p>
-                            <div class="comment-user-date-div submission-info">
-                                by <p class="comment-username">{{com.username}}</p>
-                                on
-                                <p class="comment-date">{{com.created_at}}</p>
+                        <div id="comments-container">
+                            <h3 id="comments-title">Comments:</h3>
+                            <div v-for="com in comments" class="postit comment-div">
+                                <p class="comment">{{com.comment}}</p>
+                                <div class="comment-user-date-div submission-info">
+                                    by <p class="comment-username">{{com.username}}</p>
+                                    on
+                                    <p class="comment-date">{{com.created_at}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
