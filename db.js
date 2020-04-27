@@ -10,11 +10,44 @@ module.exports.simpleQuery = (query) => {
 };
 
 ////---------------------------------------- Main Page ----------------------------------------//
+// ////--GET images
+// module.exports.getImages = () => {
+//     return db.query(`
+//     SELECT * FROM images`);
+// };
+
+//// ----------------------NEW below -------------------- //
 ////--GET images
 module.exports.getImages = () => {
-    return db.query(`
-    SELECT * FROM images`);
+    return db.query(
+        `
+    SELECT *, (
+        SELECT id FROM images
+        ORDER BY id ASC
+        LIMIT 1
+        ) AS lowest_id FROM images
+        ORDER BY id DESC
+        LIMIT 8`
+    );
 };
+
+////--GET more images
+module.exports.getMoreImages = (lastId) => {
+    return db.query(
+        `
+    SELECT *, (
+        SELECT id FROM images
+        ORDER BY id ASC
+        LIMIT 1
+        ) AS lowest_id FROM images
+        WHERE id < $1
+        ORDER BY id DESC
+        LIMIT 8`,
+        [lastId]
+    );
+};
+
+//// ----------------------NEW above -------------------- //
 
 ///--INSERT into
 module.exports.insertImageData = (url, username, title, description) => {
@@ -34,11 +67,16 @@ module.exports.getImageInfo = (id) => {
     SELECT * FROM images WHERE id = ${id}`);
 };
 
+//// ----------------------NEW changed below (added ORDER BY id DESC)-------------------- //
 ////--GET imageComments
 module.exports.getImageComments = (id) => {
     return db.query(`
-    SELECT * FROM comments WHERE img_id = ${id}`);
+    SELECT * FROM comments
+    WHERE img_id = ${id}
+    ORDER BY id DESC
+    `);
 };
+//// ----------------------NEW changed above -------------------- //
 
 ///--INSERT Comment
 module.exports.insertComment = (comment, username, img_id) => {

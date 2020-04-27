@@ -41,22 +41,41 @@ const uploader = multer({
 app.use(express.json()); //body parsing middleware. detects JSON body that axios sends, parses it, and makes the resulting object be req.body (used here in app.post("/submit-comment", ...))
 app.use(express.static("./public"));
 
-////------------------------------ When Page is loaded: GET tabledata -----------------------------------------------//
+////------------------------------ MAIN page -----------------------------------------------//
 
+////----- GET images -------------------------//
 app.get("/images", (req, res) => {
     db.getImages()
-        .then((images) => {
-            let arr = images.rows;
-            let rev = arr.reverse();
-            return rev;
+        //// ----------------------NEW changed below -------------------- //
+        // .then((images) => {
+        //     let arr = images.rows;
+        //     let rev = arr.reverse();
+        //     return images.rows;
+        // })
+        .then(({ rows }) => {
+            res.json(rows);
         })
-        .then((images) => {
-            res.json(images);
-        })
+        //// ----------------------NEW changed above -------------------- //
         .catch((err) => {
             console.log("ERROR in GET /images getImages(): ", err);
         });
 });
+
+//// ----------------------NEW changed below -------------------- //
+
+////----- GET More images -------------------------//
+app.get("/more-images/:lastId", (req, res) => {
+    console.log("lastId in index.js: ", req.params.lastId);
+    db.getMoreImages(req.params.lastId)
+        .then(({ rows }) => {
+            console.log("rows: ", rows);
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log("ERROR in GET /more-images/:lastId: ", err);
+        });
+});
+//// ----------------------NEW changed above -------------------- //
 
 ////------------------------------ MODULE -----------------------------------------------------------------------------------//
 ////----- GET IMAGE- and COMMENT INFO -------------------------//
@@ -74,11 +93,14 @@ app.get("/image/:imageId", (req, res) => {
         .then((infoAndId) => {
             db.getImageComments(infoAndId[1])
                 .then(({ rows }) => {
-                    let arr = rows;
-                    let revComms = arr.reverse();
-                    // console.log("rows: ", rows);
-                    const imageInfoAndComments = [infoAndId[0], revComms];
+                    //// ----------------------NEW changed below -------------------- //
+
+                    // let arr = rows;
+                    // let revComms = arr.reverse();
+                    // // console.log("rows: ", rows);
+                    const imageInfoAndComments = [infoAndId[0], rows];
                     res.json(imageInfoAndComments);
+                    //// ----------------------NEW changed below -------------------- //
                 })
                 .catch((err) => {
                     console.log("ERROR in getImageComments: ", err);
@@ -87,6 +109,9 @@ app.get("/image/:imageId", (req, res) => {
 
         .catch((err) => {
             console.log("ERROR in GET /images getImages(): ", err);
+
+            //Closes modal if we fail to get a response
+            res.json("nonsense");
         });
 });
 

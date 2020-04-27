@@ -15,7 +15,6 @@
             </div>
 
             <div id="input-fields-div">
-                <p></p>
                 <!-- for text fields, use v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
                 <label for='title'>Image Title: </label><input v-model='title' type="text" name='title' id='title' placeholder='title'>
                 <label for='description'>Image Description: </label><input v-model='description' type="text" name='description' id='description' placeholder='description'>
@@ -29,17 +28,23 @@
             </div>
         </form>
 
-        
+        <p @click="checkScroll">Click here to checkScroll</p>
+        <!-- <p @checkScrollEvent="checkScroll">Triggers checkScroll upon first axios.get("/images") request.</p> -->
         <h3>Latest Images:</h3>
         <div  id="image-container">
             <div  v-for='image in images' class="grid-element">
-                <div  class="image-div" @click="selectedImage = image.id">
-                    <figure>
-                        <img class="image" :src="image.url" :alt="image.description">
-                        <figcaption class="caption">{{ image.title }}</figcaption>
-                    </figure>
-                </div>
+                <!-- we remove the @click... in the line below for part 4 and instead do link-->
+                <!-- <div  class="image-div" @click="selectedImage = image.id"> -->
+                <a :href="'#' + image.id" class=image-div-link>
+                    <div  class="image-div">
+                        <figure>
+                            <img class="image" :src="image.url" :alt="image.description">
+                            <figcaption class="caption">{{ image.title }}</figcaption>
+                        </figure>
+                    </div>
+                </a>
             </div>
+            <div id="more-button" @click="moreImages">More</div>
         </div>
         
         <!-- ------------------- MODAL component below ------------------------------------- -->
@@ -68,7 +73,7 @@
                             </div>
                             
                             <div id="image-desc">
-                                <h2><div id="desc-title">{{image.title}}<div></h2>
+                                <h2><div id="desc-title">{{image.title}}</div></h2>
                                 <p class="img-desc-text">{{image.description}}
                                     <br/><span class="submission-info">Uploaded by {{image.username}} on {{image.created_at}}</span> </p>
                                 <!-- <p class="submission-info">Uploaded by {{image.username}} on {{image.created_at}}</p> -->
