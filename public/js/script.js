@@ -100,6 +100,7 @@
             //// ----------------------NEW below -------------------- //
             selectedImage: location.hash.slice(1),
             lastId: null,
+            notHidden: true,
             //// ----------------------NEW above -------------------- //
             name: "msg",
             seen: true,
@@ -182,6 +183,16 @@
 
                         self.hideMoreButtonIfEnd(resp, self);
                     })
+                    .then(function () {
+                        var scroll = window.pageYOffset + 600;
+                        window.scrollTo({ top: scroll, behavior: "smooth" });
+                    })
+                    .then(function () {
+                        //keep the infinite-scroll loop going
+                        if (!self.notHidden) {
+                            self.infiniteScroll();
+                        }
+                    })
                     .catch(function (err) {
                         console.log(
                             "ERROR in GET /more-images/this.lastId: ",
@@ -193,23 +204,17 @@
                 var lastImage = resp.data[resp.data.length - 1];
 
                 if (lastImage.lowest_id == lastImage.id) {
-                    // var styling = document.getElementById("more-button").style;
-                    // styling.visibility = "hidden";
-                    // styling.postion = "fixed";
-                    // styling.zIndex = -10;
-                    // styling.margin = 0;
-                    // styling.padding = 0;
-                    // styling.fontSize = 1 + "px";
                     this.hideMoreButton();
 
                     self.lastId = null;
-                    // console.log("SUCCESS END OF IMAGES!!");
+                    console.log("SUCCESS END OF IMAGES!!");
                 } else {
-                    // console.log("SUCCESS!!");
+                    console.log("SUCCESS!!");
                     self.lastId = lastImage.id;
                 }
             },
             checkScroll: function () {
+                this.notHidden = false;
                 /*with vanilla Javascript we can find the height of the document in various ways (different browsers calculate height differently)
                 we want to choose the highest 'height value'(which is what jQuery does). We can do this as follows
                 (curtesy of Borgar on stackoverflow:
@@ -229,22 +234,28 @@
                 );
                 //------------ Borgar's code above -------//
 
+                console.log("this.lastId in checkScroll: ", this.lastId);
                 var distanceToEnd =
                     height - window.pageYOffset - window.innerHeight;
 
-                if (distanceToEnd < 100) {
+                console.log("distanceToEnd: ", distanceToEnd);
+                if (distanceToEnd < 100 && this.lastId) {
                     this.moreImages();
                 } else if (this.lastId) {
                     this.infiniteScroll();
                 }
             },
             infiniteScroll: function () {
+                if (this.notHidden) {
+                    document.getElementById("scrollOn").style.visibility =
+                        "visible";
+                    document.getElementById(
+                        "infinite-scroll"
+                    ).style.visibility = "hidden";
+                    this.hideMoreButton();
+                }
+
                 setTimeout(this.checkScroll, 1000);
-                document.getElementById("scrollOn").style.visibility =
-                    "visible";
-                document.getElementById("infinite-scroll").style.visibility =
-                    "hidden";
-                this.hideMoreButton();
             },
             hideMoreButton: function () {
                 var styling = document.getElementById("more-button").style;

@@ -27,7 +27,7 @@ module.exports.getImages = () => {
         LIMIT 1
         ) AS lowest_id FROM images
         ORDER BY id DESC
-        LIMIT 8`
+        LIMIT 2`
     );
 };
 
@@ -42,7 +42,7 @@ module.exports.getMoreImages = (lastId) => {
         ) AS lowest_id FROM images
         WHERE id < $1
         ORDER BY id DESC
-        LIMIT 8`,
+        LIMIT 2`,
         [lastId]
     );
 };
