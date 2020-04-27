@@ -119,10 +119,7 @@
                 .then(function (resp) {
                     self.images = resp.data;
                     //// ----------------------NEW below -------------------- //
-
-                    self.eraseMoreButtonIfEnd(resp, self);
-                    // self.$emit("checkScrollEvent");
-                    // self.checkScroll();
+                    self.hideMoreButtonIfEnd(resp, self);
                     //// ----------------------NEW above -------------------- //
                 })
                 .catch(function (err) {
@@ -183,7 +180,7 @@
                             self.images.push(resp.data[i]);
                         }
 
-                        self.eraseMoreButtonIfEnd(resp, self);
+                        self.hideMoreButtonIfEnd(resp, self);
                     })
                     .catch(function (err) {
                         console.log(
@@ -192,40 +189,37 @@
                         );
                     });
             },
-            eraseMoreButtonIfEnd: function (resp, self) {
+            hideMoreButtonIfEnd: function (resp, self) {
                 var lastImage = resp.data[resp.data.length - 1];
 
                 if (lastImage.lowest_id == lastImage.id) {
-                    document.getElementById("more-button").style.visibility =
-                        "hidden";
+                    // var styling = document.getElementById("more-button").style;
+                    // styling.visibility = "hidden";
+                    // styling.postion = "fixed";
+                    // styling.zIndex = -10;
+                    // styling.margin = 0;
+                    // styling.padding = 0;
+                    // styling.fontSize = 1 + "px";
+                    this.hideMoreButton();
 
                     self.lastId = null;
-                    console.log("SUCCESS END OF IMAGES!!");
+                    // console.log("SUCCESS END OF IMAGES!!");
                 } else {
-                    console.log("SUCCESS!!");
+                    // console.log("SUCCESS!!");
                     self.lastId = lastImage.id;
                 }
             },
             checkScroll: function () {
-                var self = this;
-                console.log("window.innerHeight: ", window.innerHeight);
-                console.log("window.pageYOffset: ", window.pageYOffset);
-
-                // console.log(
-                //     "document.scrollTop: ",
-                //     document.getElementsByTagName("body")[0].clientHeight
-                // );
-
                 /*with vanilla Javascript we can find the height of the document in various ways (different browsers calculate height differently)
                 we want to choose the highest 'height value'(which is what jQuery does). We can do this as follows
                 (curtesy of Borgar on stackoverflow:
                     https://stackoverflow.com/questions/1145850/how-to-get-height-of-entire-document-with-javascript
                     )
                 */
+
+                //------------ Borgar's code below -------//
                 var body = document.body,
                     html = document.documentElement;
-
-                //'height' == $(document).height()  is true
                 var height = Math.max(
                     body.scrollHeight,
                     body.offsetHeight,
@@ -233,28 +227,35 @@
                     html.scrollHeight,
                     html.offsetHeight
                 );
+                //------------ Borgar's code above -------//
 
-                var hasReachedEnd = window.pageYOffset + window.innerHeight;
+                var distanceToEnd =
+                    height - window.pageYOffset - window.innerHeight;
 
-                if (height - hasReachedEnd <= 200) {
-                    axios.get("/more-images").then(function (resp) {
-                        console.log("resp in get /more-images: ", resp);
-                        self.checkScroll();
-                    });
-                } else {
-                    setTimeout(this.checkScroll(), 1000);
+                if (distanceToEnd < 100) {
+                    this.moreImages();
+                } else if (this.lastId) {
+                    this.infiniteScroll();
                 }
+            },
+            infiniteScroll: function () {
+                setTimeout(this.checkScroll, 1000);
+                document.getElementById("scrollOn").style.visibility =
+                    "visible";
+                document.getElementById("infinite-scroll").style.visibility =
+                    "hidden";
+                this.hideMoreButton();
+            },
+            hideMoreButton: function () {
+                var styling = document.getElementById("more-button").style;
+                styling.visibility = "hidden";
+                styling.postion = "fixed";
+                styling.zIndex = -10;
+                styling.margin = 0;
+                styling.padding = 0;
+                styling.fontSize = 1 + "px";
             },
             //// ----------------------NEW above -------------------- //
         },
     });
-
-    // function infiniteScroll() {
-    //     //change this if() condition. I want a couple buttons ("More" & "infinite Scroll") that allows the user to choose
-    //     if (location.search == "?scroll=infinitely") {
-    //         hideMoreButton();
-
-    //         checkScroll();
-    //     }
-    // }
 })();

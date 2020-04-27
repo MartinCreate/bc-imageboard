@@ -22,13 +22,11 @@ body {
 }
 
 /* ----------------- Upload-Image Form ----------------- */
-/* qanchor */
 #main form {
     /* border-bottom: 1px grey solid; */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     margin-bottom: 10px;
-    /* grid-row-gap: 20px; */
 }
 
 #upload-header {
@@ -155,7 +153,28 @@ form button {
     font-size: 25px;
 }
 
-/* qanchor */
+#image-container-header {
+    position: relative;
+}
+#image-container-header h3 {
+    margin-bottom: 30px;
+}
+
+#infinite-scroll,
+#scrollOn {
+    color: rgb(96, 96, 96);
+    position: absolute;
+    top: 30px;
+    left: 22px;
+}
+#here {
+    text-decoration: underline;
+    cursor: pointer;
+}
+#scrollOn {
+    visibility: hidden;
+}
+
 #image-container {
     /* border: 1px red solid; */
     border-width: 1px;
@@ -168,9 +187,12 @@ form button {
     box-shadow: inset 5px 5px 1px 3px black, 0px -1px 5px 1px grey;
 
     margin-top: 10px;
-    display: grid;
     background-image: url("cork-board.png");
+}
 
+#image-sub-container {
+    /* border: 1px red solid; */
+    display: grid;
     padding: 30px 10px;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     grid-row-gap: 20px;
@@ -224,7 +246,31 @@ figcaption {
 }
 
 #more-button {
-    visibility: visible;
+    /* border: 1px blue solid; */
+    /* visibility: visible; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+}
+#more-button button {
+    border: 3px rgb(52, 52, 52) solid;
+    border: 2px #ba7f2d solid;
+    border-radius: 10px;
+    color: #ba8d4f;
+    letter-spacing: 1px;
+    background-color: white;
+    padding: 7px 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+#more-button button:hover {
+    color: white;
+    background-color: #e1aa5d;
+}
+#more-button button:focus {
+    outline: none;
+    background-color: #c49047;
 }
 
 /* ------------------------------------ MODAL ------------------------------------*/

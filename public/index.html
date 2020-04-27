@@ -28,23 +28,29 @@
             </div>
         </form>
 
-        <p @click="checkScroll">Click here to checkScroll</p>
         <!-- <p @checkScrollEvent="checkScroll">Triggers checkScroll upon first axios.get("/images") request.</p> -->
-        <h3>Latest Images:</h3>
+        <div id="image-container-header">
+            <h3>Latest Images:</h3>
+            <p @click="infiniteScroll" id="infinite-scroll">Click <span id="here">here</span> for infinite scroll!</p>
+            <p id="scrollOn">Infinite scroll: On!</p> 
+        </div>
+        
         <div  id="image-container">
-            <div  v-for='image in images' class="grid-element">
-                <!-- we remove the @click... in the line below for part 4 and instead do link-->
-                <!-- <div  class="image-div" @click="selectedImage = image.id"> -->
-                <a :href="'#' + image.id" class=image-div-link>
-                    <div  class="image-div">
-                        <figure>
-                            <img class="image" :src="image.url" :alt="image.description">
-                            <figcaption class="caption">{{ image.title }}</figcaption>
-                        </figure>
+            <div id="image-sub-container">
+                <div  v-for='image in images' class="grid-element">
+                    <!-- we remove the @click... in the line below for part 4 and instead do link-->
+                    <!-- <div  class="image-div" @click="selectedImage = image.id"> -->
+                        <a :href="'#' + image.id" class=image-div-link>
+                            <div  class="image-div">
+                                <figure>
+                                    <img class="image" :src="image.url" :alt="image.description">
+                                    <figcaption class="caption">{{ image.title }}</figcaption>
+                                </figure>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-            <div id="more-button" @click="moreImages">More</div>
+                </div>
+            <div id="more-button"><button @click="moreImages">More</button></div>
         </div>
         
         <!-- ------------------- MODAL component below ------------------------------------- -->
