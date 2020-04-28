@@ -200,8 +200,7 @@
                 https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
                 */
                 var input = document.getElementById("choose-image");
-                var label = document.getElementById("choose-img-label")
-                    .innerHTML;
+                var label = document.getElementById("choose-img-label");
                 var labelVal = input.innerHTML;
 
                 if (!self.chooseImgHasEvent) {
@@ -222,6 +221,7 @@
                         "This should only show up once, for the first uploaded image of the session"
                     );
                 }
+                //---- idea for code above, from article ---------- //
             },
             moreImages: function () {
                 var self = this;
