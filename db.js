@@ -1,3 +1,7 @@
+//AWS Bucketname: martinpaul-msg-imageboard
+/* To check the images on aws, go to
+https://s3.console.aws.amazon.com/s3/buckets/martinpaul-msg-imageboard/
+*/
 const spicedPg = require("spiced-pg");
 const db = spicedPg(
     process.env.DATABASE_URL ||
@@ -10,13 +14,6 @@ module.exports.simpleQuery = (query) => {
 };
 
 ////---------------------------------------- Main Page ----------------------------------------//
-// ////--GET images
-// module.exports.getImages = () => {
-//     return db.query(`
-//     SELECT * FROM images`);
-// };
-
-//// ----------------------NEW below -------------------- //
 ////--GET images
 module.exports.getImages = () => {
     return db.query(
@@ -27,7 +24,7 @@ module.exports.getImages = () => {
         LIMIT 1
         ) AS lowest_id FROM images
         ORDER BY id DESC
-        LIMIT 2`
+        LIMIT 8`
     );
 };
 
@@ -42,12 +39,10 @@ module.exports.getMoreImages = (lastId) => {
         ) AS lowest_id FROM images
         WHERE id < $1
         ORDER BY id DESC
-        LIMIT 2`,
+        LIMIT 8`,
         [lastId]
     );
 };
-
-//// ----------------------NEW above -------------------- //
 
 ///--INSERT into
 module.exports.insertImageData = (url, username, title, description) => {
@@ -61,13 +56,21 @@ module.exports.insertImageData = (url, username, title, description) => {
 };
 
 ////---------------------------------------- MODULE ----------------------------------------//
+// ////--GET imageinfo
+// module.exports.getImageInfo = (id) => {
+//     return db.query(`
+//     SELECT * FROM images WHERE id = ${id}`);
+// };
+
 ////--GET imageinfo
 module.exports.getImageInfo = (id) => {
     return db.query(`
-    SELECT * FROM images WHERE id = ${id}`);
+    SELECT *,
+    (SELECT id AS prev_id FROM images WHERE id > ${id} ORDER BY id ASC LIMIT 1),
+    (SELECT id AS next_id FROM images WHERE id < ${id} ORDER BY id DESC LIMIT 1)
+    FROM images WHERE id = ${id}`);
 };
 
-//// ----------------------NEW changed below (added ORDER BY id DESC)-------------------- //
 ////--GET imageComments
 module.exports.getImageComments = (id) => {
     return db.query(`
@@ -76,7 +79,6 @@ module.exports.getImageComments = (id) => {
     ORDER BY id DESC
     `);
 };
-//// ----------------------NEW changed above -------------------- //
 
 ///--INSERT Comment
 module.exports.insertComment = (comment, username, img_id) => {

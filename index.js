@@ -7,7 +7,6 @@ const express = require("express");
 const app = express();
 const db = require("./db");
 const s3 = require("./s3");
-// const csurf = require("csurf"); //do we need csurf
 
 //////////////////////// DON'T TOUCH below - IMAGE UPLOAD BIOLDERPLATE /////////////////////////////
 //npm packages we installed
@@ -41,31 +40,37 @@ const uploader = multer({
 app.use(express.json()); //body parsing middleware. detects JSON body that axios sends, parses it, and makes the resulting object be req.body (used here in app.post("/submit-comment", ...))
 app.use(express.static("./public"));
 
-////------------------------------ MAIN page -----------------------------------------------//
+//--Not really middleware
+//credit for this cleanTime function goes to Carlotta ;) (for figuring out how to use Intl.DateTimeFormat)
+const cleanTime = (uploadTime) => {
+    return (uploadTime = new Intl.DateTimeFormat("en-GB", {
+        // weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        // second: "numeric",
+        hour12: false,
+        timeZone: "Etc/GMT-2",
+    }).format(uploadTime));
+};
 
-////----- GET images -------------------------//
+////------------------------------ MAIN PAGE ------------------------------------------------------------------------------//
+
+////----- GET images --------------//
 app.get("/images", (req, res) => {
     db.getImages()
-        //// ----------------------NEW changed below -------------------- //
-        // .then((images) => {
-        //     let arr = images.rows;
-        //     let rev = arr.reverse();
-        //     return images.rows;
-        // })
         .then(({ rows }) => {
             res.json(rows);
         })
-        //// ----------------------NEW changed above -------------------- //
         .catch((err) => {
             console.log("ERROR in GET /images getImages(): ", err);
         });
 });
 
-//// ----------------------NEW changed below -------------------- //
-
-////----- GET More images -------------------------//
+////----- GET More images --------------//
 app.get("/more-images/:lastId", (req, res) => {
-    console.log("lastId in index.js: ", req.params.lastId);
     db.getMoreImages(req.params.lastId)
         .then(({ rows }) => {
             console.log("rows: ", rows);
@@ -75,38 +80,36 @@ app.get("/more-images/:lastId", (req, res) => {
             console.log("ERROR in GET /more-images/:lastId: ", err);
         });
 });
-//// ----------------------NEW changed above -------------------- //
 
-////------------------------------ MODULE -----------------------------------------------------------------------------------//
-////----- GET IMAGE- and COMMENT INFO -------------------------//
+////------------------------------ MODULE ------------------------------------------------------------------------------//
 
+////----- GET IMAGE- and COMMENT INFO --------------//
 app.get("/image/:imageId", (req, res) => {
     db.getImageInfo(req.params.imageId)
-
-        //Get image info
         .then(({ rows }) => {
             const imgInfo = rows[0];
+            imgInfo.created_at = cleanTime(rows[0].created_at) + " GMT+2";
+
+            console.log("imgInfo SHOULD HAVE prev and next id: ", imgInfo);
+
             return [imgInfo, req.params.imageId];
         })
-
-        //Get image Comments
         .then((infoAndId) => {
             db.getImageComments(infoAndId[1])
                 .then(({ rows }) => {
-                    //// ----------------------NEW changed below -------------------- //
-
-                    // let arr = rows;
-                    // let revComms = arr.reverse();
-                    // // console.log("rows: ", rows);
+                    for (let i = 0; i < rows.length; i++) {
+                        rows[i].created_at =
+                            cleanTime(rows[i].created_at) + " GMT+2";
+                    }
                     const imageInfoAndComments = [infoAndId[0], rows];
+                    //Send image & comments to script.js
+                    // console.log("img and comments: ", imageInfoAndComments);
                     res.json(imageInfoAndComments);
-                    //// ----------------------NEW changed below -------------------- //
                 })
                 .catch((err) => {
                     console.log("ERROR in getImageComments: ", err);
                 });
         })
-
         .catch((err) => {
             console.log("ERROR in GET /images getImages(): ", err);
 
@@ -115,15 +118,13 @@ app.get("/image/:imageId", (req, res) => {
         });
 });
 
-////----- SUBMIT COMMENT -------------------------//
-
+////----- SUBMIT COMMENT --------------//
 app.post("/submit-comment", (req, res) => {
     const bod = req.body;
-    // console.log("req.body: ", req.body);
 
     db.insertComment(bod.newComment, bod.commenter, bod.img_id).then(
         ({ rows }) => {
-            console.log("rows from insertComment: ", rows);
+            rows[0].created_at = cleanTime(rows[0].created_at) + " GMT+2";
             res.json(rows);
         }
     );
