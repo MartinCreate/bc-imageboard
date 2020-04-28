@@ -63,6 +63,7 @@ module.exports.insertImageData = (url, username, title, description) => {
 // };
 
 ////--GET imageinfo (with next/prev id)
+//prev_id is the higher id, because we're displaying the images in reverse order (newest first). Therefore when we have a modal open, the newer image will be to the left, and since it feels right to call the left image the 'previous' image and the right image the 'next' image, prev_id is the higher number and next_id is the lower number
 module.exports.getImageInfo = (id) => {
     return db.query(`
     SELECT *,

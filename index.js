@@ -90,8 +90,6 @@ app.get("/image/:imageId", (req, res) => {
             const imgInfo = rows[0];
             imgInfo.created_at = cleanTime(rows[0].created_at) + " GMT+2";
 
-            console.log("imgInfo SHOULD HAVE prev and next id: ", imgInfo);
-
             return [imgInfo, req.params.imageId];
         })
         .then((infoAndId) => {
@@ -103,7 +101,6 @@ app.get("/image/:imageId", (req, res) => {
                     }
                     const imageInfoAndComments = [infoAndId[0], rows];
                     //Send image & comments to script.js
-                    // console.log("img and comments: ", imageInfoAndComments);
                     res.json(imageInfoAndComments);
                 })
                 .catch((err) => {

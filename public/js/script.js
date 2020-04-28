@@ -221,7 +221,7 @@
                         "This should only show up once, for the first uploaded image of the session"
                     );
                 }
-                //---- idea for code above, from article ---------- //
+                //---- idea for code above is from tympanus.net article ---------- //
             },
             moreImages: function () {
                 var self = this;
