@@ -274,7 +274,7 @@ figcaption {
     font-size: 12px;
 }
 
-.modal-background {
+#modal-background {
     /* border: 2px red solid; */
     background-color: rgba(43, 43, 43, 0.502);
     box-sizing: border-box;

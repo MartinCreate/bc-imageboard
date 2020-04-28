@@ -42,16 +42,21 @@
                             self.image = resp.data[0];
                             self.comments = resp.data[1];
 
-                            if (!self.image.next_id) {
-                                console.log("WE HERE NOW");
-                                document.getElementById(
-                                    "next-icon"
-                                ).style.visibility = "hidden";
-                            }
+                            var sim = self.image;
+                            self.hideShowNextPrev("prev-icon", sim.prev_id);
+                            self.hideShowNextPrev("next-icon", sim.next_id);
 
-                            var im = self.image;
-                            self.hideShowNextPrev("prev-icon", im.prev_id);
-                            self.hideShowNextPrev("next-icon", im.next_id);
+                            //Closing with click outside of modal
+                            document
+                                .getElementById("modal-background")
+                                .addEventListener("click", function () {
+                                    self.$emit("closing-time");
+                                });
+                            document
+                                .getElementById("modal")
+                                .addEventListener("click", function (e) {
+                                    e.stopPropagation();
+                                });
                         }
                     })
                     .catch(function (err) {

@@ -62,7 +62,7 @@ module.exports.insertImageData = (url, username, title, description) => {
 //     SELECT * FROM images WHERE id = ${id}`);
 // };
 
-////--GET imageinfo
+////--GET imageinfo (with next/prev id)
 module.exports.getImageInfo = (id) => {
     return db.query(`
     SELECT *,
