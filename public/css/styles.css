@@ -17,8 +17,9 @@ body {
 }
 
 #main h1 {
-    margin: 20px;
-    margin-bottom: 40px;
+    margin: 50px 20px;
+    /* margin-bottom: 40px; */
+    padding-right: 45px;
     text-align: center;
 }
 
@@ -39,6 +40,7 @@ body {
 
 #input-fields-div {
     /* border: 1px purple solid; */
+    /* padding-left: 2vw; */
     min-width: 300px;
 }
 
@@ -48,7 +50,7 @@ body {
     font-size: 20px;
     float: left;
     clear: left;
-    width: 40%;
+    width: 50%;
     min-width: 140px;
     padding-right: 10px;
     text-align: right;
@@ -63,10 +65,10 @@ body {
     background-color: rgba(245, 245, 245, 0);
     box-sizing: border-box;
     font-size: 20px;
-    width: 45%;
+    width: 50%;
     margin-top: 12px;
     margin-bottom: 10px;
-    margin-right: 5%;
+    /* margin-right: 1%; */
 
     float: left;
 }
@@ -341,7 +343,7 @@ figcaption {
     border-radius: 100%;
     /* background-image: url("next.png"); */
     position: fixed;
-    top: 300px;
+    top: 45%;
     width: 50px;
     height: 50px;
     cursor: pointer;
