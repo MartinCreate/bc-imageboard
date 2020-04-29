@@ -144,7 +144,7 @@ form button {
 
 /* ---------------------------------- Image Container ---------------------------------- */
 
-#main h3 {
+.main-header {
     margin-left: 20px;
     margin-right: 20px;
     font-size: 25px;
@@ -251,7 +251,7 @@ figcaption {
 }
 #more-button button {
     border: 3px rgb(52, 52, 52) solid;
-    border: 2px #6d4915 solid;
+    border: 3px #6d4915 solid;
     border-radius: 10px;
     color: #6d4915;
     letter-spacing: 1px;
@@ -546,7 +546,9 @@ figcaption {
 }
 
 #comments-title {
-    font-size: 30px;
+    /* border: 1px red solid; */
+    font-size: 40px;
+    margin-bottom: 20px;
     color: rgb(40, 40, 40);
 }
 
@@ -555,13 +557,13 @@ figcaption {
         sans-serif;
     padding: 20px;
     /* margin: 20px; */
-    max-width: 50%;
+    max-width: 40%;
 
     /* The following styling for this .postit class (with minor adjustments made by me) comes from the blog post at the url:
             https://mentormate.com/blog/css-postit-note/      */
 
     border: 1px solid #e8e8e8;
-    border-top: 20px solid #fdfd86;
+    border-top: 10px solid #fdfd86;
     border-bottom-right-radius: 60px 5px;
 
     background: #ffff88; /* Old browsers */
@@ -618,6 +620,10 @@ figcaption {
 .comment-div {
     /* border: 1px grey solid; */
     margin-top: 15px;
+}
+
+.comment {
+    font-size: 18px;
 }
 
 .comment-user-date-div {
