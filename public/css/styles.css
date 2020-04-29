@@ -36,6 +36,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: rgb(52, 52, 52);
+}
+#upload-header img {
+    filter: contrast(60%);
 }
 
 #input-fields-div {
@@ -47,6 +51,7 @@ body {
 #input-fields-div label {
     /* border: 1px blue solid; */
     box-sizing: border-box;
+    color: rgb(52, 52, 52);
     font-size: 20px;
     float: left;
     clear: left;
@@ -148,6 +153,7 @@ form button {
     margin-left: 20px;
     margin-right: 20px;
     font-size: 25px;
+    color: rgb(52, 52, 52);
 }
 
 #image-container-header {
@@ -551,7 +557,7 @@ figcaption {
 
 #comments-title {
     /* border: 1px red solid; */
-    font-size: 40px;
+    font-size: 30px;
     margin-bottom: 20px;
     color: rgb(40, 40, 40);
 }
