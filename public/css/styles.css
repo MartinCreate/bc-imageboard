@@ -205,6 +205,10 @@ form button {
 .image-div-link {
     text-decoration: none;
     color: black;
+    filter: contrast(85%);
+}
+.image-div-link:hover {
+    filter: contrast(100%);
 }
 .image-div {
     /* border: 1px grey solid; */
@@ -230,8 +234,8 @@ figure {
 figcaption {
     background-color: white;
     margin: 0;
-    padding: 2px;
-    padding-left: 10px;
+    padding: 2px 10px;
+    /* padding-left: 10px; */
     position: absolute;
     bottom: 0;
     left: 0;

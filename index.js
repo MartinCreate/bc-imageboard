@@ -87,6 +87,7 @@ app.get("/more-images/:lastId", (req, res) => {
 app.get("/image/:imageId", (req, res) => {
     db.getImageInfo(req.params.imageId)
         .then(({ rows }) => {
+            console.log("rows[0] in get /image/:imageId: ", rows[0]);
             const imgInfo = rows[0];
             imgInfo.created_at = cleanTime(rows[0].created_at);
 
