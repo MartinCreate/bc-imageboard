@@ -88,7 +88,7 @@ app.get("/image/:imageId", (req, res) => {
     db.getImageInfo(req.params.imageId)
         .then(({ rows }) => {
             const imgInfo = rows[0];
-            imgInfo.created_at = cleanTime(rows[0].created_at) + " GMT+2";
+            imgInfo.created_at = cleanTime(rows[0].created_at);
 
             return [imgInfo, req.params.imageId];
         })
@@ -96,8 +96,7 @@ app.get("/image/:imageId", (req, res) => {
             db.getImageComments(infoAndId[1])
                 .then(({ rows }) => {
                     for (let i = 0; i < rows.length; i++) {
-                        rows[i].created_at =
-                            cleanTime(rows[i].created_at) + " GMT+2";
+                        rows[i].created_at = cleanTime(rows[i].created_at);
                     }
                     const imageInfoAndComments = [infoAndId[0], rows];
                     //Send image & comments to script.js
@@ -121,7 +120,7 @@ app.post("/submit-comment", (req, res) => {
 
     db.insertComment(bod.newComment, bod.commenter, bod.img_id).then(
         ({ rows }) => {
-            rows[0].created_at = cleanTime(rows[0].created_at) + " GMT+2";
+            rows[0].created_at = cleanTime(rows[0].created_at);
             res.json(rows);
         }
     );

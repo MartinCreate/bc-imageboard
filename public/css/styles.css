@@ -471,7 +471,7 @@ figcaption {
 
 .submission-info {
     font-size: 14px;
-    font-style: italic;
+    /* font-style: italic; */
 }
 
 /* #divider2 {
@@ -481,7 +481,7 @@ figcaption {
 } */
 
 .sub {
-    color: rgb(133, 132, 132);
+    color: rgb(159, 158, 158);
 }
 /* ------------------ Modal Comments ------------------ */
 
