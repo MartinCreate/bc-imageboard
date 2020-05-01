@@ -147,7 +147,7 @@ form button {
     color: red;
 }
 
-/* ---------------------------------- Image Container ---------------------------------- */
+/* ---------------------------------- Images Container ---------------------------------- */
 
 .main-header {
     margin-left: 20px;
@@ -184,10 +184,10 @@ form button {
     border-style: solid;
     border-image-source: url("retina_wood2.png");
     border-image-slice: 20;
-    border-image-width: 10;
-    border-image-outset: 1;
+    border-image-width: 13;
+    border-image-outset: 3;
     border-image-repeat: repeat;
-    box-shadow: inset 5px 5px 1px 3px black, 0px -1px 5px 1px grey;
+    box-shadow: inset 8px 8px 4px 1px black, 0px -3px 5px 1px grey;
 
     margin-top: 10px;
     background-image: url("cork-board.png");
@@ -196,8 +196,8 @@ form button {
 #image-sub-container {
     /* border: 1px red solid; */
     display: grid;
-    padding: 30px 10px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    padding: 30px 30px;
+    grid-template-columns: repeat(auto-fit, minmax(312px, 1fr));
     grid-row-gap: 20px;
 }
 
@@ -231,10 +231,10 @@ figure {
 }
 
 .image {
-    height: 180px;
-    width: 250px;
+    height: 210px;
+    width: 300px;
     object-fit: contain;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 figcaption {
@@ -377,15 +377,16 @@ figcaption {
     box-sizing: border-box;
     display: flex;
     min-height: 20vh;
-    max-height: 92vh;
+    max-height: 95vh;
     max-width: 82vw;
     overflow: auto;
 
     align-items: center;
 
     padding: 5px;
-    padding-top: 0;
+    padding-top: 5px;
     margin: 0;
+    margin-bottom: 20px;
 }
 
 #modal-image-div div {
