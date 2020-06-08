@@ -8,7 +8,7 @@ if (process.env.NODE_ENV == "production") {
     secrets = require("./secrets"); // in dev they are in secrets.json which is listed in .gitignore
 }
 
-//creating object that has permission to talk to amazon (and assigning it to s3)
+// //creating object that has permission to talk to amazon (and assigning it to s3)
 const s3 = new aws.S3({
     accessKeyId: secrets.AWS_KEY,
     secretAccessKey: secrets.AWS_SECRET,
