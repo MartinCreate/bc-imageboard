@@ -37,11 +37,10 @@ const uploader = multer({
 //////////////////////// DON'T TOUCH above - IMAGE UPLOAD BIOLDERPLATE /////////////////////////////
 
 ////------------------------------ MIDDLEWARE -----------------------------------------------//
-app.use(express.json()); //body parsing middleware. detects JSON body that axios sends, parses it, and makes the resulting object be req.body (used here in app.post("/submit-comment", ...))
+app.use(express.json());
 app.use(express.static("./public"));
 
 //--Not really middleware
-//credit for this cleanTime function goes to Carlotta ;) (for figuring out how to use Intl.DateTimeFormat)
 const cleanTime = (uploadTime) => {
     return (uploadTime = new Intl.DateTimeFormat("en-GB", {
         // weekday: "long",
@@ -52,7 +51,8 @@ const cleanTime = (uploadTime) => {
         minute: "numeric",
         // second: "numeric",
         hour12: false,
-        timeZone: "Etc/GMT-2",
+        // timeZone: "Etc/GMT-2",
+        timeZone: "UTC",
     }).format(uploadTime));
 };
 
