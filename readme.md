@@ -28,7 +28,7 @@ Design by Martin Paul
 -   Main Page
     ![](./public/screenshots/1.png)
     ![](./public/screenshots/2.png)
--   Modal
+-   Modal for viewing image and posting comments
     ![](./public/screenshots/3.png)
     ![](./public/screenshots/4.png)
     ![](./public/screenshots/5.png)
