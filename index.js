@@ -9,11 +9,9 @@ const db = require("./db");
 const s3 = require("./s3");
 
 //////////////////////// DON'T TOUCH below - IMAGE UPLOAD BIOLDERPLATE /////////////////////////////
-//npm packages we installed
 const multer = require("multer"); //saves our files to our harddrive
 const uidSafe = require("uid-safe"); //creates random string to give each file a unique name
-//core node module
-const path = require("path");
+const path = require("path"); //core node module
 
 const diskStorage = multer.diskStorage({
     //where on harddrive files will be saved
@@ -58,7 +56,6 @@ const cleanTime = (uploadTime) => {
 
 ////------------------------------ MAIN PAGE ------------------------------------------------------------------------------//
 
-////----- GET images --------------//
 app.get("/images", (req, res) => {
     db.getImages()
         .then(({ rows }) => {
@@ -69,7 +66,6 @@ app.get("/images", (req, res) => {
         });
 });
 
-////----- GET More images --------------//
 app.get("/more-images/:lastId", (req, res) => {
     db.getMoreImages(req.params.lastId)
         .then(({ rows }) => {
@@ -140,7 +136,6 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             bod.title,
             bod.description
         ).then(({ rows }) => {
-            //Send INSERT data back to vue in script.js
             res.json({
                 rows,
             });

@@ -9,7 +9,6 @@
             this.axiosModal(this.id, self, "mounted");
         },
         watch: {
-            //'watch' detects when values in props change and triggers the specified function
             //whenever our image id changes, this function will run (it checks the 'props: ' above)
             id: function () {
                 var self = this;
@@ -19,9 +18,7 @@
             },
         },
         data: function () {
-            //'data' in a vue.component returns a new object for each call so each new component has its own data object
             return {
-                count: 0, //possibly get rid of this
                 image: {},
                 comments: [],
 
@@ -31,11 +28,10 @@
         },
         methods: {
             axiosModal: function (thisId, self, errorLocation) {
-                //Request the data needed for current modal
                 axios
                     .get(`/image/${thisId}`)
                     .then(function (resp) {
-                        //handle url inputs that don't match any image_id in database
+                        //handle url-inputs that don't match any image_id in database
                         if (resp.data[0] == null || resp.data == "nonsense") {
                             self.$emit("closing-time");
                         } else {
@@ -123,7 +119,6 @@
             selectedImage: location.hash.slice(1),
             lastId: null,
             name: "msg",
-            seen: true, //leftover from demo?
             images: [],
             title: "",
             description: "",
@@ -135,8 +130,8 @@
 
         mounted: function () {
             //"this" lets us access the properties in data:{}
-            var self = this; //assigning "this" to self, lets us .this within .then() functions
-            console.log("my vue has MOUNTED!");
+            var self = this; //assigning "this" to self, lets us use .this within .then() functions
+            console.log("my vue component has MOUNTED!");
 
             axios
                 .get("/images")
@@ -164,10 +159,9 @@
                 formData.append("username", this.username);
                 formData.append("file", this.file);
                 //the append() method comes from FormData. it lets us add properties in append('key', value) pairs
-                //console.logging formData won't show us these properties (even though it does have them)
 
                 axios
-                    .post("/upload", formData) //sends formData along with post request
+                    .post("/upload", formData)
                     .then(function (resp) {
                         //Add query-response data to this Vue-instance's data object. shows new image in imageboard without having to reload the page
                         self.images.unshift(resp.data.rows[0]);
@@ -182,7 +176,7 @@
                         document.getElementById("error-message").innerHTML =
                             "Woops, looks like something went wrong with the upload</br>(max image size: 2mb)";
                     });
-            }, //  <-- submitImage end
+            }, //  <-- submitImage() end
             handleImgFile: function (e) {
                 console.log("handleImgFile is running! ");
 
@@ -190,7 +184,6 @@
                 this.file = e.target.files[0];
             },
             closeModal: function () {
-                //This function executes upon "closing-time" event
                 location.hash = "";
                 this.selectedImage = null;
             },
@@ -209,7 +202,7 @@
                         fileName = e.target.value;
 
                         if (fileName) {
-                            //fileName had C:/fakepath/ at the beginning, so I slice it off here
+                            //fileName has "C:/fakepath/" at the beginning, so I slice it off here
                             fileName = fileName.slice(12);
                             label.innerHTML = fileName;
                         } else {
@@ -234,14 +227,6 @@
 
                         self.hideMoreButtonIfEnd(resp, self);
                     })
-                    // .then(function () {
-                    //     //Optional. might disable for presentation
-                    //     var scroll = window.pageYOffset + 180;
-                    //     window.scrollTo({
-                    //         top: scroll,
-                    //         behavior: "smooth",
-                    //     });
-                    // })
                     .then(function () {
                         //Keep the infinite-scroll loop going (notHidden gets set to false in checkScroll and checkScroll only runs if we click the infinit-scroll-button, which hides the 'More' button)
                         if (!self.notHidden) {
@@ -328,7 +313,6 @@
                     "Choose an image ...";
                 self.file = null;
             },
-            //// ----------------------NEW above -------------------- //
         },
     });
 })();

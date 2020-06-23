@@ -15,14 +15,13 @@
             </div>
 
             <div id="input-fields-div">
-                <!-- for text fields, use v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
                 <label for='title'>Image Title: </label><input v-model='title' type="text" name='title' id='title' class="image-inputs" placeholder='title'>
                 <label for='description'>Image Description: </label><input v-model='description' type="text" name='description' id='description' class="image-inputs" placeholder='description'>
                 <label for='username'>Username: </label><input v-model='username' type="text" name='username'  id='username' class="image-inputs" placeholder='username'>
             </div>
             <div id="upload-buttons-div">
                 <label @click="chooseImgButton" for="choose-image" id='choose-img-label'>Choose an image ...</label>
-                <input @change='handleImgFile' type="file" name='file' id='choose-image' accept='image/*'> <!-- /* Tells us that it only accepts files that are images -->
+                <input @change='handleImgFile' type="file" name='file' id='choose-image' accept='image/*'>
 
                 <button @click='submitImage' id='submit-button'>Submit</button>
                 <p id="error-message"></p>
@@ -95,18 +94,10 @@
                                     
                             </div>
                                 
-                            <!-- <div id="divider"></div> -->
-
-                            <!-- <div id="divider2"></div> -->
                         </div>
 
 
-                        <!-- <button @click="count++">Click Me!</button>
-                        <p>Counter: {{count}}</p> -->
-
-
                         <div class="submit-comment-div postit" id="submit-comment-div-id">
-                            <!-- for text fields, v-model='propertyKeyOfDataObjectInScript.js' connects the inputted value to the property in the 'data' (in script.js).  -->
                             <p>Add Your Comment:</p>
                             <input v-model='newComment' type="text" name='newComment' placeholder='Comment Here' class="comment-input comm">
                             <input v-model='commenter' type="text" name='commenter' placeholder='Username' class="comment-input comm">

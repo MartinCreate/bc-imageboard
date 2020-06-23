@@ -4,7 +4,6 @@
 
 body {
     background-color: bisque;
-    /* background-image: url("fresh_snow.png"); */
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
 }
@@ -12,27 +11,23 @@ body {
 /* ------------------------------------ MAIN PAGE ------------------------------------*/
 
 #main {
-    /* border: 1px blue solid; */
     height: 100%;
 }
 
 #main h1 {
     margin: 50px 20px;
-    /* margin-bottom: 40px; */
     padding-right: 45px;
     text-align: center;
 }
 
 /* ----------------- Upload-Image Form ----------------- */
 #main form {
-    /* border-bottom: 1px grey solid; */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     margin-bottom: 10px;
 }
 
 #upload-header {
-    /* border: 1px green solid; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,13 +38,10 @@ body {
 }
 
 #input-fields-div {
-    /* border: 1px purple solid; */
-    /* padding-left: 2vw; */
     min-width: 300px;
 }
 
 #input-fields-div label {
-    /* border: 1px blue solid; */
     box-sizing: border-box;
     color: rgb(52, 52, 52);
     font-size: 20px;
@@ -65,7 +57,6 @@ body {
 
 #input-fields-div input {
     border: none;
-    /* border: 1px purple solid; */
     border-bottom: 1px grey solid;
     background-color: rgba(245, 245, 245, 0);
     box-sizing: border-box;
@@ -73,7 +64,6 @@ body {
     width: 50%;
     margin-top: 12px;
     margin-bottom: 10px;
-    /* margin-right: 1%; */
 
     float: left;
 }
@@ -84,7 +74,6 @@ body {
 }
 
 #upload-buttons-div {
-    /* border: 1px blue solid; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -108,7 +97,7 @@ body {
 }
 
 #choose-image {
-    /* Hide actual (unstylable) 'choose file' button */
+    /* Hides actual (unstylable) 'choose file' button */
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
@@ -179,7 +168,6 @@ form button {
 }
 
 #image-container {
-    /* border: 1px red solid; */
     border-width: 1px;
     border-style: solid;
     border-image-source: url("retina_wood2.png");
@@ -194,7 +182,6 @@ form button {
 }
 
 #image-sub-container {
-    /* border: 1px red solid; */
     display: grid;
     padding: 30px 30px;
     grid-template-columns: repeat(auto-fit, minmax(312px, 1fr));
@@ -202,7 +189,6 @@ form button {
 }
 
 .grid-element {
-    /* border: 2px purple solid; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -217,7 +203,6 @@ form button {
     filter: contrast(100%);
 }
 .image-div {
-    /* border: 1px grey solid; */
     background-image: url("paper_fibers.png");
     position: relative;
     padding-top: 1px;
@@ -241,19 +226,13 @@ figcaption {
     background-color: white;
     margin: 0;
     padding: 2px 10px;
-    /* padding-left: 10px; */
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
 }
 
-.caption {
-    /* border: green 1px solid; */
-}
-
 #more-button {
-    /* border: 1px blue solid; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -287,7 +266,6 @@ figcaption {
 }
 
 #modal-background {
-    /* border: 2px red solid; */
     background-color: rgba(43, 43, 43, 0.502);
     box-sizing: border-box;
 
@@ -315,7 +293,6 @@ figcaption {
 }
 
 #modal-content {
-    /* border: 1px rgba(0, 0, 0, 0.459) solid; */
     border-radius: 2px;
     box-shadow: inset 1px 1px 1px 1px rgba(0, 0, 0, 0.39);
     background-image: url("cork-board.png");
@@ -325,7 +302,6 @@ figcaption {
 }
 
 #modal-content-shadowsaver {
-    /* border: 1px red solid; */
     box-sizing: border-box;
     height: 99.8%;
     width: 100%;
@@ -337,7 +313,6 @@ figcaption {
 /* ------------------ Modal Image & Description------------------ */
 
 #modal-image-container {
-    /* border: 2px blueviolet solid; */
     position: relative;
     border-radius: 10px;
     text-align: center;
@@ -351,7 +326,6 @@ figcaption {
 #next-icon {
     border: 1px rgba(0, 0, 255, 0) solid;
     border-radius: 100%;
-    /* background-image: url("next.png"); */
     position: fixed;
     top: 45%;
     width: 50px;
@@ -367,13 +341,10 @@ figcaption {
 }
 #prev-icon:hover,
 #next-icon:hover {
-    /* border: 1px grey solid; */
     opacity: 1;
-    /* background-color: rgba(255, 255, 255, 0.5); */
 }
 
 #modal-image-div {
-    /* border: 1px green solid; */
     box-sizing: border-box;
     display: flex;
     min-height: 20vh;
@@ -390,7 +361,6 @@ figcaption {
 }
 
 #modal-image-div div {
-    /* border: 1px green solid; */
     padding: 20px;
     border-radius: 3px;
     background-color: rgba(255, 255, 255, 0.5);
@@ -398,18 +368,15 @@ figcaption {
 }
 
 #modal-image {
-    /* border: 1px red solid; */
     max-width: 78vw;
     max-height: 83vh;
 }
 
 #modal-image-container h2 {
-    /* border: 1px red solid; */
     width: 100%;
 }
 
 #image-desc {
-    /* border: 2px red solid; */
     background-color: #fff;
     box-shadow: 3px 5px 3px rgba(0, 0, 0, 0.32);
 
@@ -433,7 +400,6 @@ figcaption {
 }
 
 #image-desc p {
-    /* border-bottom: 1px rgb(90, 153, 249) solid; */
     overflow: scroll;
 
     /* Most of the code below (within this selector) comes from:
@@ -476,20 +442,12 @@ figcaption {
 }
 
 #modal-image-container p {
-    /* border: 1px solid red; */
     margin-top: 20px;
 }
 
 .submission-info {
     font-size: 14px;
-    /* font-style: italic; */
 }
-
-/* #divider2 {
-    margin-top: 10px;
-    border-bottom: 3px solid lightgrey;
-    width: 120%;
-} */
 
 .sub {
     color: rgb(159, 158, 158);
@@ -503,7 +461,6 @@ figcaption {
     width: 30%;
 }
 #submit-comment-div-id * {
-    /* border: 1px red solid; */
     display: block;
     font-size: 20px;
 }
@@ -517,9 +474,6 @@ figcaption {
     background-color: grey;
     color: white;
 }
-/* #submit-comment-div-id button:active {
-    background-color: rgb(82, 82, 82);
-} */
 #submit-comment-div-id button:focus {
     background-color: rgb(82, 82, 82);
     outline: none;
@@ -530,7 +484,6 @@ figcaption {
 }
 
 .comment-input {
-    /* border: 2px red solid; */
     border: none;
     border-bottom: 1px black solid;
     width: 100%;
@@ -545,7 +498,6 @@ figcaption {
 /* ------ Comments Container------------------- */
 
 #comments-container {
-    /* border: 1px solid red; */
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.5);
     padding: 20px;
@@ -557,7 +509,6 @@ figcaption {
 }
 
 #comments-title {
-    /* border: 1px red solid; */
     font-size: 30px;
     margin-bottom: 20px;
     color: rgb(40, 40, 40);
@@ -567,7 +518,6 @@ figcaption {
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
     padding: 20px;
-    /* margin: 20px; */
     max-width: 40%;
 
     /* The following styling for this .postit class (with minor adjustments made by me) comes from the blog post at the url:
@@ -629,7 +579,6 @@ figcaption {
 }
 
 .comment-div {
-    /* border: 1px grey solid; */
     margin-top: 15px;
 }
 
@@ -648,7 +597,6 @@ figcaption {
 }
 
 #x {
-    /* border: 1px solid lightgrey; */
     border-radius: 10px;
     color: rgb(103, 103, 103);
     display: inline-block;
@@ -670,7 +618,6 @@ figcaption {
 
 @media screen and (min-width: 300px) and (max-width: 600px) {
     #upload-header {
-        /* border: 1px black solid; */
         margin: 0;
         padding-left: 50px;
     }
@@ -684,12 +631,10 @@ figcaption {
     }
 
     #input-fields-div {
-        /* border: 1px purple solid; */
         margin-top: 30px;
     }
 
     #upload-buttons-div {
-        /* border: 1px blue solid; */
         margin-top: 40px;
         margin-bottom: 20px;
     }

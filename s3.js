@@ -42,7 +42,6 @@ exports.upload = (req, res, next) => {
             fs.unlink(path, () => {}); //(optional) deletes image from 'uploads' directory (and therefore your harddrive), after it was uploaded to amazon
         })
         .catch((err) => {
-            // uh oh
             console.log("ERROR in upload PUT object in s3.js: ", err);
             res.sendStatus(500);
         });
