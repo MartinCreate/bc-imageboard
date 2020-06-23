@@ -23,12 +23,15 @@ Design by Martin Paul
     -   image title, description, username, url, upload-date
     -   comment text, username, comment-date
 
-### Screenshots
+## Screenshots
 
--   Main Page
+### Main Page
+
     ![](./public/screenshots/1.png)
     ![](./public/screenshots/2.png)
--   Modal - View Image, Post Comments
+
+### Modal - View Image, Post Comments
+
     ![](./public/screenshots/3.png)
     ![](./public/screenshots/4.png)
     ![](./public/screenshots/5.png)
