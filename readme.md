@@ -1,6 +1,6 @@
 # Imageboard
 
-This r/doodles imageboard is a sketch-themed, single-page, Vue.js web application for uploading and commenting on images. For demonstration purposes the images and their titles, descriptions and usernames were taken from reddit.com/r/doodles.
+This imageboard is a sketch-themed, single-page, Vue.js web application for uploading and commenting on images. For demonstration purposes the images and their titles, descriptions and usernames were taken from reddit.com/r/doodles.
 
 Design by Martin Paul
 
