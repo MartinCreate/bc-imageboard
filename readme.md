@@ -15,13 +15,16 @@ Design by Martin Paul
 
 ## Tech Stack
 
--   Vue.js
--   Node.js
--   Express
+-   Javascript
+    -   Vue
+    -   Node.js
+    -   Express
 -   Amazon Web Services - for storing the uploaded images
 -   PostgreSQL - for storing
     -   image title, description, username, url, upload-date
     -   comment text, username, comment-date
+-   HTML
+-   CSS
 
 ## Screenshots
 
